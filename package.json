@@ -2,7 +2,7 @@
   "name": "nailed-it",
   "version": "1.0.0",
   "scripts": {
-    "win": "node index.js"
+    "dev": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -12,5 +12,14 @@
   "bugs": {
     "url": "https://github.com/Kim-Hyeong-joon/nailed-it/issues"
   },
-  "homepage": "https://github.com/Kim-Hyeong-joon/nailed-it#readme"
+  "homepage": "https://github.com/Kim-Hyeong-joon/nailed-it#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/node": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "nodemon": "^2.0.19"
+  }
 }
