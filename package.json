@@ -1,0 +1,16 @@
+{
+  "name": "nailed-it",
+  "version": "1.0.0",
+  "scripts": {
+    "win": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kim-Hyeong-joon/nailed-it.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kim-Hyeong-joon/nailed-it/issues"
+  },
+  "homepage": "https://github.com/Kim-Hyeong-joon/nailed-it#readme"
+}
