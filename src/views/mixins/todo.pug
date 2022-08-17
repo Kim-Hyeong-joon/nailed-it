@@ -1,0 +1,5 @@
+mixin todo(todo,n)
+    if todo
+        input(type="text", name=`todo${n}`, placeholder=`${n}.`, value=todo.todo)
+    else 
+        input(type="text", name=`todo${n}`, placeholder=`${n}.`)

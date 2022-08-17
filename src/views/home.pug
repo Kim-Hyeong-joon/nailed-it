@@ -1,19 +1,34 @@
 extends base
 
 block content
-    form(method="POST")
+    form(method="POST", action="/todos")
         span 해낼 일
-        input(type="text", placeholder="1.")
-        input(type="text", placeholder="2.")
-        input(type="text", placeholder="3.")
-        input(type="text", placeholder="4.")
-        input(type="text", placeholder="5.")
-        input(type="submit" value="저장하기")
-    form(method="POST")
+            if todo1
+                input(type="text", name="todo1", placeholder="1.", value=todo1.todo)
+            else 
+                input(type="text", name="todo1", placeholder="1.")
+            if todo2
+                input(type="text", name="todo2", placeholder="2.", value=todo2.todo)
+            else 
+                input(type="text", name="todo2", placeholder="2.")
+            if todo3
+                input(type="text", name="todo3", placeholder="3.", value=todo3.todo)
+            else 
+                input(type="text", name="todo3", placeholder="3.")
+            if todo4
+                input(type="text", name="todo4", placeholder="4.", value=todo4.todo)
+            else 
+                input(type="text", name="todo4", placeholder="4.")
+            if todo5
+                input(type="text", name="todo5", placeholder="5.", value=todo5.todo)
+            else 
+                input(type="text", name="todo5", placeholder="5.")
+            input(type="submit" value="저장하기")
+    form(method="POST", action="/details")
         span 할 일 쪼개기
-        input(type="text", placeholder="1.")
-        input(type="text", placeholder="2.")
-        input(type="text", placeholder="3.")
-        input(type="text", placeholder="4.")
-        input(type="text", placeholder="5.")
+        input(type="text", placeholder="1.", name="detail1")
+        input(type="text", placeholder="2.", name="detail2")
+        input(type="text", placeholder="3.", name="detail3")
+        input(type="text", placeholder="4.", name="detail4")
+        input(type="text", placeholder="5.", name="detail5")
         input(type="submit" value="저장하기")
