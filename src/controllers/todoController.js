@@ -98,3 +98,13 @@ export const postDetails = async (req, res) => {
 
   return res.sendStatus(201);
 };
+
+export const loadDetails = async (req, res) => {
+  const { id } = req.params;
+  const todo = await Todo.findById(id);
+  if (!todo) {
+    return res.sendStatus(404);
+  }
+  const details = todo.details;
+  return res.status(201).json({ details });
+};

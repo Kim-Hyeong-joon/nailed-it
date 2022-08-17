@@ -5,6 +5,7 @@ const todo4 = document.querySelector(".todo-form__todo:nth-child(4)");
 const todo5 = document.querySelector(".todo-form__todo:nth-child(5)");
 
 let todoId;
+let detailArray;
 
 const handleDetailsSubmit = async (event) => {
   event.preventDefault();
@@ -39,21 +40,35 @@ const handleDetailsSubmit = async (event) => {
   });
 };
 
-const createDetail = (detailNumber) => {
+const createDetail = (detailNumber, detailContent) => {
   // detail input 생성하는 함수
   const detail = document.createElement("input");
   detail.placeholder = `${detailNumber}.`;
   detail.name = `detail${detailNumber}`;
   detail.className = "detail-form__detail";
+  if (detailContent) {
+    detail.value = detailContent;
+  }
   return detail;
 };
 
-const paintDetailsForm = () => {
+const paintDetailsForm = async () => {
   const oldForm = document.getElementById("detailForm");
   const oldSpan = document.getElementById("detail-title");
   if (oldForm) {
     oldSpan.remove();
     oldForm.remove();
+  }
+
+  // server에서 details 불러오기
+  if (todoId) {
+    const response = await fetch(`/api/${todoId}/load-details`);
+    if (response.status === 201) {
+      const { details } = await response.json();
+      detailArray = details;
+    }
+  } else {
+    detailArray = []; // todoId가 없을 경우(todo가 비어있을 경우) detailArray 삭제
   }
   const div = document.querySelector(".detail-form");
   const newForm = document.createElement("form");
@@ -61,11 +76,11 @@ const paintDetailsForm = () => {
   newForm.id = "detailForm";
   newForm.method = "POST";
   newForm.action = "/details";
-  const detail1 = createDetail("1");
-  const detail2 = createDetail("2");
-  const detail3 = createDetail("3");
-  const detail4 = createDetail("4");
-  const detail5 = createDetail("5");
+  const detail1 = createDetail("1", detailArray[0]);
+  const detail2 = createDetail("2", detailArray[1]);
+  const detail3 = createDetail("3", detailArray[2]);
+  const detail4 = createDetail("4", detailArray[3]);
+  const detail5 = createDetail("5", detailArray[4]);
   const submit = document.createElement("input");
   submit.type = "submit";
   submit.value = "저장";
@@ -84,6 +99,7 @@ const paintDetailsForm = () => {
 
 const handleClick = (event) => {
   todoId = event.target.dataset.id;
+  console.log(todoId);
   paintDetailsForm();
 };
 
