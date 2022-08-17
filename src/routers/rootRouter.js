@@ -6,7 +6,6 @@ const rootRouter = express.Router();
 
 rootRouter.get("/", home);
 rootRouter.post("/todos", postTodos);
-rootRouter.post("/details", postDetails);
 rootRouter.get("/login", login);
 
 export default rootRouter;

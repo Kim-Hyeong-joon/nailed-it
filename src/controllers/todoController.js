@@ -67,9 +67,34 @@ export const postTodos = async (req, res) => {
   return res.redirect("/");
 };
 
-export const postDetails = (req, res) => {
-  const { detail1, detail2, detail3, detail4, detail5 } = req.body;
-  const details = [detail1, detail2, detail3, detail4, detail5];
-  console.log(details);
-  return res.redirect("/");
+export const postDetails = async (req, res) => {
+  const {
+    params: { id },
+    body: {
+      detail1Value,
+      detail2Value,
+      detail3Value,
+      detail4Value,
+      detail5Value,
+    },
+  } = req;
+
+  const todo = await Todo.findById(id);
+
+  if (!todo) {
+    return res.sendStatus(404);
+  }
+
+  const details = [
+    detail1Value,
+    detail2Value,
+    detail3Value,
+    detail4Value,
+    detail5Value,
+  ];
+
+  todo.details = details;
+  todo.save();
+
+  return res.sendStatus(201);
 };
