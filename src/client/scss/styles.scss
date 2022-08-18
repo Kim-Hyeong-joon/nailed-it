@@ -1,5 +1,24 @@
 @import "./variable";
 
 body {
-  background-color: #7bb643;
+  background-color: #a7a4ce;
+}
+
+.todo-form__todo {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  all: unset;
+  color: red;
+}
+
+.todo-box {
+  display: flex;
+  align-items: center;
+}
+
+.percentage-box {
+  margin-left: 50px;
 }

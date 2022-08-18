@@ -1,29 +1,53 @@
 extends base
 
 block content
-    span 해낼 일
-    form(method="POST", action="/todos").todo-form
-        if todo1
-            input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id).todo-form__todo
-        else 
-            input(type="text", name="todo1", placeholder="1.").todo-form__todo
-        if todo2
-            input(type="text", name="todo2", placeholder="2.", value=todo2.todo, data-id=todo2._id).todo-form__todo
-        else 
-            input(type="text", name="todo2", placeholder="2.").todo-form__todo
-        if todo3
-            input(type="text", name="todo3", placeholder="3.", value=todo3.todo,data-id=todo3._id).todo-form__todo
-        else 
-            input(type="text", name="todo3", placeholder="3.").todo-form__todo
-        if todo4
-            input(type="text", name="todo4", placeholder="4.", value=todo4.todo, data-id=todo4._id).todo-form__todo
-        else 
-            input(type="text", name="todo4", placeholder="4.").todo-form__todo
-        if todo5
-            input(type="text", name="todo5", placeholder="5.", value=todo5.todo, data-id=todo5._id).todo-form__todo
-        else 
-            input(type="text", name="todo5", placeholder="5.").todo-form__todo
-        input(type="submit" value="저장하기")
+    div.todo-box
+        div
+            span 해낼 일
+            form(method="POST", action="/todos").todo-form
+                if todo1
+                    div.todo-form__todo
+                        input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id)
+                        button ✔️
+                else 
+                    div.todo-form__todo
+                        input(type="text", name="todo1", placeholder="1.").todo-form__todo
+                        button ✔️
+                if todo2
+                    div.todo-form__todo
+                        input(type="text", name="todo2", placeholder="2.", value=todo2.todo, data-id=todo2._id)
+                        button ✔️
+                else 
+                    div.todo-form__todo
+                        input(type="text", name="todo2", placeholder="2.").todo-form__todo
+                        button ✔️
+                if todo3
+                    div.todo-form__todo
+                        input(type="text", name="todo3", placeholder="3.", value=todo3.todo,data-id=todo3._id)
+                        button ✔️
+                else 
+                    div.todo-form__todo
+                        input(type="text", name="todo3", placeholder="3.").todo-form__todo
+                        button ✔️
+                if todo4
+                    div.todo-form__todo
+                        input(type="text", name="todo4", placeholder="4.", value=todo4.todo, data-id=todo4._id)
+                        button ✔️
+                else 
+                    div.todo-form__todo
+                        input(type="text", name="todo4", placeholder="4.").todo-form__todo
+                        button ✔️
+                if todo5
+                    div.todo-form__todo
+                        input(type="text", name="todo5", placeholder="5.", value=todo5.todo, data-id=todo5._id)
+                        button ✔️
+                else 
+                    div.todo-form__todo
+                        input(type="text", name="todo5", placeholder="5.").todo-form__todo
+                        button ✔️
+                input(type="submit" value="저장하기")
+        div.percentage-box
+            span 0%
     
     div.detail-form
     //-

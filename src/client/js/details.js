@@ -1,11 +1,19 @@
-const todo1 = document.querySelector(".todo-form__todo:nth-child(1)");
-const todo2 = document.querySelector(".todo-form__todo:nth-child(2)");
-const todo3 = document.querySelector(".todo-form__todo:nth-child(3)");
-const todo4 = document.querySelector(".todo-form__todo:nth-child(4)");
-const todo5 = document.querySelector(".todo-form__todo:nth-child(5)");
+const todo1 = document.querySelector(".todo-form__todo:nth-child(1) > input");
+const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
+const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
+const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
+const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
+const btn1 = document.querySelector(".todo-form__todo:nth-child(1) > button");
+const btn2 = document.querySelector(".todo-form__todo:nth-child(2) > button");
+const btn3 = document.querySelector(".todo-form__todo:nth-child(3) > button");
+const btn4 = document.querySelector(".todo-form__todo:nth-child(4) > button");
+const btn5 = document.querySelector(".todo-form__todo:nth-child(5) > button");
 
 let todoId;
 let detailArray;
+let achieveNumber = 0;
+const achievePercent = (achieveNumber) => (achieveNumber / 5) * 100;
+const remainPercent = (achievePercent) => 100 - achievePercent;
 
 const handleDetailsSubmit = async (event) => {
   event.preventDefault();
@@ -99,8 +107,24 @@ const paintDetailsForm = async () => {
 
 const handleClick = (event) => {
   todoId = event.target.dataset.id;
-  console.log(todoId);
   paintDetailsForm();
+};
+
+const handleCheckClick = (event) => {
+  event.preventDefault();
+  const todo = event.target.parentElement.querySelector("input");
+  if (!todo.disabled) {
+    todo.disabled = true;
+    achieveNumber += 1;
+  } else {
+    todo.disabled = false;
+    achieveNumber -= 1;
+  }
+
+  const percentage = achievePercent(achieveNumber);
+  // HTML에 percentage 추가
+  const span = document.querySelector(".percentage-box > span");
+  span.innerText = `${percentage}%`;
 };
 
 todo1.addEventListener("click", handleClick);
@@ -108,3 +132,8 @@ todo2.addEventListener("click", handleClick);
 todo3.addEventListener("click", handleClick);
 todo4.addEventListener("click", handleClick);
 todo5.addEventListener("click", handleClick);
+btn1.addEventListener("click", handleCheckClick);
+btn2.addEventListener("click", handleCheckClick);
+btn3.addEventListener("click", handleCheckClick);
+btn4.addEventListener("click", handleCheckClick);
+btn5.addEventListener("click", handleCheckClick);
