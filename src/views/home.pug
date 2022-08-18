@@ -47,6 +47,7 @@ block content
                         button ✔️
                 input(type="submit" value="저장하기")
         div.percentage-box
+            canvas(width="300", height="300")#percentChart
             span 0%
     
     div.detail-form
@@ -60,4 +61,5 @@ block content
             input(type="text", placeholder="5.", name="detail5")
             input(type="submit" value="저장하기")
 block scripts 
+    script(src="/static/js/chart.js")
     script(src="/static/js/details.js")
