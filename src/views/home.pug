@@ -7,11 +7,11 @@ block content
             form(method="POST", action="/todos").todo-form
                 if todo1
                     div.todo-form__todo
-                        input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id)
+                        input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled)
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo1", placeholder="1.").todo-form__todo
+                        input(type="text", name="todo1", placeholder="1.")
                         button ✔️
                 if todo2
                     div.todo-form__todo
@@ -19,7 +19,7 @@ block content
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo2", placeholder="2.").todo-form__todo
+                        input(type="text", name="todo2", placeholder="2.")
                         button ✔️
                 if todo3
                     div.todo-form__todo
@@ -27,7 +27,7 @@ block content
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo3", placeholder="3.").todo-form__todo
+                        input(type="text", name="todo3", placeholder="3.")
                         button ✔️
                 if todo4
                     div.todo-form__todo
@@ -35,7 +35,7 @@ block content
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo4", placeholder="4.").todo-form__todo
+                        input(type="text", name="todo4", placeholder="4.")
                         button ✔️
                 if todo5
                     div.todo-form__todo
@@ -43,7 +43,7 @@ block content
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo5", placeholder="5.").todo-form__todo
+                        input(type="text", name="todo5", placeholder="5.")
                         button ✔️
                 input(type="submit" value="저장하기")
         div.percentage-box
@@ -61,5 +61,6 @@ block content
             input(type="text", placeholder="5.", name="detail5")
             input(type="submit" value="저장하기")
 block scripts 
+    script(src="/static/js/todo.js")
     script(src="/static/js/chart.js")
     script(src="/static/js/details.js")

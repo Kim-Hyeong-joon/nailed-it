@@ -41,7 +41,7 @@ const handleDetailsSubmit = async (event) => {
 };
 
 const createDetail = (detailNumber, detailContent) => {
-  // detail input 생성하는 함수
+  // detail input HTML 생성하는 함수
   const detail = document.createElement("input");
   detail.placeholder = `${detailNumber}.`;
   detail.name = `detail${detailNumber}`;
