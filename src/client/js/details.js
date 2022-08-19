@@ -6,6 +6,7 @@ const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
 
 let todoId;
 let detailArray;
+let todoTitle;
 
 const handleDetailsSubmit = async (event) => {
   event.preventDefault();
@@ -72,13 +73,15 @@ const paintDetailsForm = async () => {
   if (todoId) {
     const response = await fetch(`/api/${todoId}/load-details`);
     if (response.status === 201) {
-      const { details } = await response.json();
+      const { details, title } = await response.json();
       detailArray = details;
+      todoTitle = title;
     }
   } else {
     detailArray = []; // todoId가 없을 경우(todo가 비어있을 경우) detailArray 삭제
   }
   const div = document.querySelector(".detail-form");
+  div.dataset.id = todoId;
   const newForm = document.createElement("form");
   newForm.addEventListener("submit", handleDetailsSubmit);
   newForm.id = "detailForm";
@@ -100,7 +103,7 @@ const paintDetailsForm = async () => {
   newForm.appendChild(detail5);
   newForm.appendChild(submit);
   const span = document.createElement("span");
-  span.innerText = "할 일 쪼개기";
+  span.innerText = `할 일 쪼개기: ${todoTitle}`;
   span.id = "detail-title";
   div.appendChild(span);
   div.appendChild(newForm);

@@ -65,6 +65,17 @@ const handleTodoSubmit = async (event) => {
     addTodoDataset(todos[4], 4);
   }
   chartUpdateBtn.click();
+
+  // 할 일 쪼개기 title update
+  const div = document.querySelector(".detail-form");
+  if (div) {
+    const titleResponse = await fetch(`/api/${div.dataset.id}/details-title`);
+    if (titleResponse.status === 201) {
+      const { title } = await titleResponse.json();
+      const span = document.querySelector(".detail-form span");
+      span.innerText = `할 일 쪼개기: ${title}`;
+    }
+  }
 };
 
 const handleInputKeydown = (event) => {
