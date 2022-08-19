@@ -1,5 +1,5 @@
 import { Chart } from "chart.js";
-import { todoArray } from "./todo";
+import { todoArray } from "./handler";
 const todoForm = document.querySelector(".todo-form");
 const ctx = document.getElementById("percentChart").getContext("2d");
 const btn1 = document.querySelector(".todo-form__todo:nth-child(1) > button");
@@ -13,8 +13,6 @@ const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
 const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
 const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
 const spanPercent = document.querySelector(".percentage-box > span");
-
-console.log(todoArray);
 
 const todoDisabledArray = [
   // 할 일 체크된 todo 확인
@@ -54,41 +52,39 @@ const achievePercent = () => (achieveNumber / totalNumber) * 100;
 
 spanPercent.innerText = `${achieveChart}%`;
 
-const paintChart = () => {
-  todoChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: ["해낸 일", "해낼 일"],
-      datasets: [
-        {
-          label: "Nailed It",
-          data: [parseInt(achieveChart), 100 - parseInt(achieveChart)],
-          backgroundColor: ["green", "teal"],
-          borderWidth: 0.5,
-          borderColor: "black",
-        },
-      ],
+todoChart = new Chart(ctx, {
+  type: "pie",
+  data: {
+    labels: ["해낸 일", "해낼 일"],
+    datasets: [
+      {
+        label: "Nailed It",
+        data: [parseInt(achieveChart), 100 - parseInt(achieveChart)],
+        backgroundColor: ["green", "teal"],
+        borderWidth: 0.5,
+        borderColor: "black",
+      },
+    ],
+  },
+  options: {
+    title: { display: true, text: "Nailed It!", fontsize: 20 },
+    legend: { display: true, position: "bottom" },
+    tooltips: {
+      enabled: false,
     },
-    options: {
-      title: { display: true, text: "Nailed It!", fontsize: 20 },
-      legend: { display: true, position: "bottom" },
-      tooltips: {
-        enabled: false,
-      },
-      layout: {
-        padding: {
-          left: 10,
-          right: 10,
-          top: 20,
-          bottom: 0,
-        },
-      },
-      animation: {
-        duration: 1500,
+    layout: {
+      padding: {
+        left: 10,
+        right: 10,
+        top: 20,
+        bottom: 0,
       },
     },
-  });
-};
+    animation: {
+      duration: 1500,
+    },
+  },
+});
 
 const handleCheckClick = (event) => {
   event.preventDefault();
@@ -120,10 +116,6 @@ const handleTodoSubmit = () => {
   ).length;
 
   achieveChart = achievePercent();
-  console.log(totalNumber);
-  console.log(achieveNumber);
-
-  console.log(achieveChart);
 
   todoChart.data.datasets[0].data[0] = parseInt(achieveChart);
   todoChart.data.datasets[0].data[1] = 100 - parseInt(achieveChart);
@@ -131,7 +123,6 @@ const handleTodoSubmit = () => {
   todoChart.update();
 };
 
-paintChart();
 btn1.addEventListener("click", handleCheckClick);
 btn2.addEventListener("click", handleCheckClick);
 btn3.addEventListener("click", handleCheckClick);

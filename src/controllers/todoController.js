@@ -1,5 +1,4 @@
 import Todo from "../models/todo";
-import Detail from "../models/detail";
 
 const findTodo = (todo) => {
   return Todo.findOne({ nameId: todo });
