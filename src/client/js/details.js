@@ -52,6 +52,14 @@ const createDetail = (detailNumber, detailContent) => {
   return detail;
 };
 
+const handleDetailsEnter = (event) => {
+  if (event.code === "Enter") {
+    event.preventDefault();
+    const detailSubmit = document.getElementById("detailSubmit");
+    detailSubmit.click();
+  }
+};
+
 const paintDetailsForm = async () => {
   const oldForm = document.getElementById("detailForm");
   const oldSpan = document.getElementById("detail-title");
@@ -84,6 +92,7 @@ const paintDetailsForm = async () => {
   const submit = document.createElement("input");
   submit.type = "submit";
   submit.value = "저장";
+  submit.id = "detailSubmit";
   newForm.appendChild(detail1);
   newForm.appendChild(detail2);
   newForm.appendChild(detail3);
@@ -95,6 +104,11 @@ const paintDetailsForm = async () => {
   span.id = "detail-title";
   div.appendChild(span);
   div.appendChild(newForm);
+  detail1.addEventListener("keydown", handleDetailsEnter);
+  detail2.addEventListener("keydown", handleDetailsEnter);
+  detail3.addEventListener("keydown", handleDetailsEnter);
+  detail4.addEventListener("keydown", handleDetailsEnter);
+  detail5.addEventListener("keydown", handleDetailsEnter);
 };
 
 const handleClick = (event) => {

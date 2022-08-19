@@ -1,4 +1,5 @@
 const todoForm = document.querySelector(".todo-form");
+const submitTodo = document.getElementById("submitTodo");
 const todo1 = document.querySelector(".todo-form__todo:nth-child(1) > input");
 const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
 const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
@@ -9,6 +10,10 @@ const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoArray = [todo1, todo2, todo3, todo4, todo5];
 
+let isCommand;
+let isKeyS;
+
+// todo가 update 됐을 때 dataset.id update하는 function
 const addTodoDataset = (todoObj, arrayIndex) => {
   if (todoObj) {
     todoArray[arrayIndex].dataset.id = todoObj._id;
@@ -17,6 +22,7 @@ const addTodoDataset = (todoObj, arrayIndex) => {
   }
 };
 
+// todo form POST
 const handleTodoSubmit = async (event) => {
   event.preventDefault();
 
@@ -48,6 +54,8 @@ const handleTodoSubmit = async (event) => {
       todo5Disabled,
     }),
   });
+
+  // server에서 data 받아서 todo에 data.id 추가
   if (response.status === 201) {
     const { todos } = await response.json();
     addTodoDataset(todos[0], 0);
@@ -59,4 +67,25 @@ const handleTodoSubmit = async (event) => {
   chartUpdateBtn.click();
 };
 
+const handleInputKeydown = (event) => {
+  if (event.code === "Enter") {
+    event.preventDefault();
+    submitTodo.click();
+    const detailForm = document.getElementById("detailForm");
+    if (detailForm) {
+      const detailSubmit = document.getElementById("detailSubmit");
+      detailSubmit.click();
+    }
+  }
+};
+
+const handleInputDoubleClick = (event) => {
+  console.log(event.target);
+};
+
 todoForm.addEventListener("submit", handleTodoSubmit);
+todo1.addEventListener("keydown", handleInputKeydown);
+todo2.addEventListener("keydown", handleInputKeydown);
+todo3.addEventListener("keydown", handleInputKeydown);
+todo4.addEventListener("keydown", handleInputKeydown);
+todo5.addEventListener("keydown", handleInputKeydown);

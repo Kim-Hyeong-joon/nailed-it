@@ -1,5 +1,4 @@
 import { Chart } from "chart.js";
-const todoForm = document.querySelector(".todo-form");
 const ctx = document.getElementById("percentChart").getContext("2d");
 const btn1 = document.querySelector(".todo-form__todo:nth-child(1) > button");
 const btn2 = document.querySelector(".todo-form__todo:nth-child(2) > button");
@@ -88,6 +87,7 @@ todoChart = new Chart(ctx, {
 });
 // ------------ Chart 생성 --------------
 
+// -------- check box에 click event가 발생 했을 때
 const handleCheckClick = (event) => {
   event.preventDefault();
   const todo = event.target.parentElement.querySelector("input");
@@ -101,7 +101,6 @@ const handleCheckClick = (event) => {
   }
 
   achieveChart = achievePercent(achieveNumber);
-  // HTML에 percentage 추가
 
   spanPercent.innerText = `${achieveChart}%`;
 
@@ -111,7 +110,8 @@ const handleCheckClick = (event) => {
   todoChart.update();
 };
 
-const handleTodoSubmit = () => {
+// total todo가 바뀌었을 때 (todo submit후, fetch가 완료 된 후 발생함)
+const handleUpdateTotalTodos = () => {
   todoTotalCheckArray = checkTotalArray();
   totalNumber = todoTotalCheckArray.filter((element) =>
     Boolean(element)
@@ -130,4 +130,4 @@ btn2.addEventListener("click", handleCheckClick);
 btn3.addEventListener("click", handleCheckClick);
 btn4.addEventListener("click", handleCheckClick);
 btn5.addEventListener("click", handleCheckClick);
-chartUpdateBtn.addEventListener("click", handleTodoSubmit);
+chartUpdateBtn.addEventListener("click", handleUpdateTotalTodos);
