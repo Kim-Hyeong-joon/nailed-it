@@ -1,5 +1,4 @@
 import { Chart } from "chart.js";
-import { todoArray } from "./handler";
 const todoForm = document.querySelector(".todo-form");
 const ctx = document.getElementById("percentChart").getContext("2d");
 const btn1 = document.querySelector(".todo-form__todo:nth-child(1) > button");
@@ -13,6 +12,7 @@ const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
 const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
 const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
 const spanPercent = document.querySelector(".percentage-box > span");
+const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoDisabledArray = [
   // 할 일 체크된 todo 확인
@@ -52,6 +52,7 @@ const achievePercent = () => (achieveNumber / totalNumber) * 100;
 
 spanPercent.innerText = `${achieveChart}%`;
 
+// -------- Chart 생성 -----------
 todoChart = new Chart(ctx, {
   type: "pie",
   data: {
@@ -85,6 +86,7 @@ todoChart = new Chart(ctx, {
     },
   },
 });
+// ------------ Chart 생성 --------------
 
 const handleCheckClick = (event) => {
   event.preventDefault();
@@ -116,7 +118,7 @@ const handleTodoSubmit = () => {
   ).length;
 
   achieveChart = achievePercent();
-
+  spanPercent.innerText = `${achieveChart}%`;
   todoChart.data.datasets[0].data[0] = parseInt(achieveChart);
   todoChart.data.datasets[0].data[1] = 100 - parseInt(achieveChart);
 
@@ -128,4 +130,4 @@ btn2.addEventListener("click", handleCheckClick);
 btn3.addEventListener("click", handleCheckClick);
 btn4.addEventListener("click", handleCheckClick);
 btn5.addEventListener("click", handleCheckClick);
-todoForm.addEventListener("submit", handleTodoSubmit);
+chartUpdateBtn.addEventListener("click", handleTodoSubmit);
