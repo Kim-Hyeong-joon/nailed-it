@@ -108,7 +108,7 @@ export const postDetails = async (req, res) => {
   ];
 
   todo.details = details;
-  todo.save();
+  todo.update();
 
   return res.sendStatus(201);
 };

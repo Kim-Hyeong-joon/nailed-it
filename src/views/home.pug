@@ -7,43 +7,43 @@ block content
             form(method="POST", action="/todos").todo-form
                 if todo1
                     div.todo-form__todo
-                        input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled)
+                        input(type="text", name="todo1", placeholder="1.", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo1", placeholder="1.")
+                        input(type="text", name="todo1", placeholder="1.", autocomplete="off", spellcheck="false")
                         button ✔️
                 if todo2
                     div.todo-form__todo
-                        input(type="text", name="todo2", placeholder="2.", value=todo2.todo, data-id=todo2._id, disabled=todo2.disabled)
+                        input(type="text", name="todo2", placeholder="2.", value=todo2.todo, data-id=todo2._id, disabled=todo2.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo2", placeholder="2.")
+                        input(type="text", name="todo2", placeholder="2.", autocomplete="off", spellcheck="false")
                         button ✔️
                 if todo3
                     div.todo-form__todo
-                        input(type="text", name="todo3", placeholder="3.", value=todo3.todo,data-id=todo3._id, disabled=todo3.disabled)
+                        input(type="text", name="todo3", placeholder="3.", value=todo3.todo,data-id=todo3._id, disabled=todo3.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo3", placeholder="3.")
+                        input(type="text", name="todo3", placeholder="3.", autocomplete="off", spellcheck="false")
                         button ✔️
                 if todo4
                     div.todo-form__todo
-                        input(type="text", name="todo4", placeholder="4.", value=todo4.todo, data-id=todo4._id, disabled=todo4.disabled)
+                        input(type="text", name="todo4", placeholder="4.", value=todo4.todo, data-id=todo4._id, disabled=todo4.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo4", placeholder="4.")
+                        input(type="text", name="todo4", placeholder="4.", autocomplete="off", spellcheck="false")
                         button ✔️
                 if todo5
                     div.todo-form__todo
-                        input(type="text", name="todo5", placeholder="5.", value=todo5.todo, data-id=todo5._id, disabled=todo5.disabled)
+                        input(type="text", name="todo5", placeholder="5.", value=todo5.todo, data-id=todo5._id, disabled=todo5.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo5", placeholder="5.")
+                        input(type="text", name="todo5", placeholder="5.", autocomplete="off", spellcheck="false")
                         button ✔️
                 input(type="submit" value="저장하기")#submitTodo
         div.percentage-box

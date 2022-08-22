@@ -18,7 +18,7 @@ const handleDetailsSubmit = async (event) => {
   const detail3 = document.querySelector(".detail-form__detail:nth-child(3)");
   const detail4 = document.querySelector(".detail-form__detail:nth-child(4)");
   const detail5 = document.querySelector(".detail-form__detail:nth-child(5)");
-  if (detail1 === "") {
+  if (detail1.value === "") {
     return;
   }
   const detail1Value = detail1.value;
@@ -26,7 +26,7 @@ const handleDetailsSubmit = async (event) => {
   const detail3Value = detail3.value;
   const detail4Value = detail4.value;
   const detail5Value = detail5.value;
-  const response = await fetch(`/api/${todoId}/details`, {
+  await fetch(`/api/${todoId}/details`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -81,7 +81,11 @@ const paintDetailsForm = async () => {
     detailArray = []; // todoId가 없을 경우(todo가 비어있을 경우) detailArray 삭제
   }
   const div = document.querySelector(".detail-form");
-  div.dataset.id = todoId;
+  if (todoId) {
+    div.dataset.id = todoId;
+  } else {
+    delete div.dataset.id;
+  }
   const newForm = document.createElement("form");
   newForm.addEventListener("submit", handleDetailsSubmit);
   newForm.id = "detailForm";
@@ -103,7 +107,11 @@ const paintDetailsForm = async () => {
   newForm.appendChild(detail5);
   newForm.appendChild(submit);
   const span = document.createElement("span");
-  span.innerText = `할 일 쪼개기: ${todoTitle}`;
+  if (todoId) {
+    span.innerText = `할 일 쪼개기: ${todoTitle}`;
+  } else {
+    span.innerText = "할 일 쪼개기:";
+  }
   span.id = "detail-title";
   div.appendChild(span);
   div.appendChild(newForm);
@@ -114,13 +122,22 @@ const paintDetailsForm = async () => {
   detail5.addEventListener("keydown", handleDetailsEnter);
 };
 
-const handleClick = (event) => {
-  todoId = event.target.dataset.id;
+const handleSelect = (event) => {
+  if (event.target.dataset.id) {
+    todoId = event.target.dataset.id;
+  } else {
+    todoId = null;
+  }
   paintDetailsForm();
 };
 
-todo1.addEventListener("click", handleClick);
-todo2.addEventListener("click", handleClick);
-todo3.addEventListener("click", handleClick);
-todo4.addEventListener("click", handleClick);
-todo5.addEventListener("click", handleClick);
+todo1.addEventListener("select", handleSelect);
+todo2.addEventListener("select", handleSelect);
+todo3.addEventListener("select", handleSelect);
+todo4.addEventListener("select", handleSelect);
+todo5.addEventListener("select", handleSelect);
+todo1.addEventListener("click", handleSelect);
+todo2.addEventListener("click", handleSelect);
+todo3.addEventListener("click", handleSelect);
+todo4.addEventListener("click", handleSelect);
+todo5.addEventListener("click", handleSelect);

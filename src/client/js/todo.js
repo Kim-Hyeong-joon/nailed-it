@@ -12,6 +12,8 @@ const todoArray = [todo1, todo2, todo3, todo4, todo5];
 
 let isCommand;
 let isKeyS;
+let todoId;
+let nameId;
 
 // todo가 update 됐을 때 dataset.id update하는 function
 const addTodoDataset = (todoObj, arrayIndex) => {
@@ -21,6 +23,33 @@ const addTodoDataset = (todoObj, arrayIndex) => {
     delete todoArray[arrayIndex].dataset.id;
   }
 };
+
+// detail form title update (있었는데 없어졌을 때, 없었는데 생겼을 때)
+const detailFormIdUpdate = (todoObj, arrayIndex, todoNameId) => {
+  if (todoObj && nameId === todoNameId && !todoId) {
+    const detailForm = document.querySelector(".detail-form");
+    detailForm.dataset.id = todoObj._id;
+    todoId = todoObj._id;
+    todoArray[arrayIndex].click(); // details.js의 todoId update를 위해서 추가.
+  }
+  if (!todoObj && nameId === todoNameId && todoId) {
+    const detailForm = document.querySelector(".detail-form");
+    delete detailForm.dataset.id;
+    todoId = null;
+    todoArray[arrayIndex].click(); // details.js의 todoId update를 위해서 추가.
+  }
+};
+
+/* if (todos[4] && nameId === "todo5" && !todoId) {
+  const detailForm = document.querySelector(".detail-form");
+  detailForm.dataset.id = todos[4]._id;
+  todoId = todos[4]._id;
+}
+if (!todos[4] && nameId === "todo5" && todoId) {
+  const detailForm = document.querySelector(".detail-form");
+  delete detailForm.dataset.id;
+  todoId = null;
+} */
 
 // todo form POST
 const handleTodoSubmit = async (event) => {
@@ -63,18 +92,27 @@ const handleTodoSubmit = async (event) => {
     addTodoDataset(todos[2], 2);
     addTodoDataset(todos[3], 3);
     addTodoDataset(todos[4], 4);
+
+    detailFormIdUpdate(todos[0], 0, "todo1");
+    detailFormIdUpdate(todos[1], 1, "todo2");
+    detailFormIdUpdate(todos[2], 2, "todo3");
+    detailFormIdUpdate(todos[3], 3, "todo4");
+    detailFormIdUpdate(todos[4], 4, "todo5");
   }
   chartUpdateBtn.click();
 
-  // 할 일 쪼개기 title update
+  // detail form title update
   const div = document.querySelector(".detail-form");
-  if (div) {
+  if (div.dataset.id) {
     const titleResponse = await fetch(`/api/${div.dataset.id}/details-title`);
     if (titleResponse.status === 201) {
       const { title } = await titleResponse.json();
       const span = document.querySelector(".detail-form span");
       span.innerText = `할 일 쪼개기: ${title}`;
     }
+  } else {
+    const span = document.querySelector(".detail-form span");
+    span.innerText = "할 일 쪼개기:";
   }
 };
 
@@ -82,16 +120,16 @@ const handleInputKeydown = (event) => {
   if (event.code === "Enter") {
     event.preventDefault();
     submitTodo.click();
-    const detailForm = document.getElementById("detailForm");
-    if (detailForm) {
-      const detailSubmit = document.getElementById("detailSubmit");
-      detailSubmit.click();
-    }
   }
 };
 
-const handleInputDoubleClick = (event) => {
-  console.log(event.target);
+const handleClick = (event) => {
+  if (event.target.dataset.id) {
+    todoId = event.target.dataset.id;
+  } else {
+    todoId = null;
+  }
+  nameId = event.target.name;
 };
 
 todoForm.addEventListener("submit", handleTodoSubmit);
@@ -100,3 +138,9 @@ todo2.addEventListener("keydown", handleInputKeydown);
 todo3.addEventListener("keydown", handleInputKeydown);
 todo4.addEventListener("keydown", handleInputKeydown);
 todo5.addEventListener("keydown", handleInputKeydown);
+
+todo1.addEventListener("click", handleClick);
+todo2.addEventListener("click", handleClick);
+todo3.addEventListener("click", handleClick);
+todo4.addEventListener("click", handleClick);
+todo5.addEventListener("click", handleClick);
