@@ -4,7 +4,8 @@ body {
   background-color: #a7a4ce;
 }
 
-.todo-form__todo {
+.todo-form__todo,
+.detail-form__detail {
   display: flex;
   align-items: center;
 }
@@ -20,5 +21,13 @@ button {
 }
 
 .percentage-box {
+  margin-left: 50px;
+}
+
+.detail-box {
+  display: flex;
+}
+
+.detail-chart {
   margin-left: 50px;
 }

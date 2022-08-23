@@ -14,7 +14,7 @@ const spanPercent = document.querySelector(".percentage-box > span");
 const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoDisabledArray = [
-  // 할 일 체크된 todo 확인
+  // 처음에 rendering 했을 때, 할 일 체크된 todo 확인
   todo1.disabled,
   todo2.disabled,
   todo3.disabled,
@@ -108,6 +108,8 @@ const handleCheckClick = (event) => {
   todoChart.data.datasets[0].data[1] = 100 - parseInt(achieveChart);
 
   todoChart.update();
+  const todoSubmit = document.getElementById("submitTodo");
+  todoSubmit.click();
 };
 
 // total todo가 바뀌었을 때 (todo submit후, fetch가 완료 된 후 발생함)

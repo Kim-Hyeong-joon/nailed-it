@@ -5,7 +5,6 @@ const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
 const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
 const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
 const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
-
 const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoArray = [todo1, todo2, todo3, todo4, todo5];
@@ -39,17 +38,6 @@ const detailFormIdUpdate = (todoObj, arrayIndex, todoNameId) => {
     todoArray[arrayIndex].click(); // details.js의 todoId update를 위해서 추가.
   }
 };
-
-/* if (todos[4] && nameId === "todo5" && !todoId) {
-  const detailForm = document.querySelector(".detail-form");
-  detailForm.dataset.id = todos[4]._id;
-  todoId = todos[4]._id;
-}
-if (!todos[4] && nameId === "todo5" && todoId) {
-  const detailForm = document.querySelector(".detail-form");
-  delete detailForm.dataset.id;
-  todoId = null;
-} */
 
 // todo form POST
 const handleTodoSubmit = async (event) => {

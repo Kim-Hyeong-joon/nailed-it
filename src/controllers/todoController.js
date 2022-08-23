@@ -93,12 +93,6 @@ export const postDetails = async (req, res) => {
     },
   } = req;
 
-  const todo = await Todo.findById(id);
-
-  if (!todo) {
-    return res.sendStatus(404);
-  }
-
   const details = [
     detail1Value,
     detail2Value,
@@ -106,9 +100,11 @@ export const postDetails = async (req, res) => {
     detail4Value,
     detail5Value,
   ];
+  const todo = await Todo.findByIdAndUpdate(id, { details }, { new: true });
 
-  todo.details = details;
-  todo.update();
+  if (!todo) {
+    return res.sendStatus(404);
+  }
 
   return res.sendStatus(201);
 };

@@ -50,7 +50,11 @@ block content
             canvas(width="300", height="300")#percentChart
             span 0%
     
-    div.detail-form
+    div.detail-box
+        div.detail-form
+        div.detail-chart
+            canvas(width="300", height="300")#detailCanvas
+            span
     div#updateChart
     //-
         form(method="POST", action="/details")
