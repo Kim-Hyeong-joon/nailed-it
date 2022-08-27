@@ -212,8 +212,6 @@ const handleSelect = async (event) => {
     todoId = null;
   }
 
-  console.log("hi");
-
   if (todoId) {
     await paintDetailsForm();
     paintDetailsChart(disabledArray, detailArray);

@@ -90,41 +90,49 @@ const handleTodoSubmit = async (event) => {
   const detailBox = document.querySelector(".detail-form");
   const detailForm = document.querySelector("#detailForm");
 
-  todo1.blur();
-  todo2.blur();
-  todo3.blur();
-  todo4.blur();
-  todo5.blur();
-
-  const oldForm = document.getElementById("detailForm");
-  const oldSpan = document.getElementById("detail-title");
-  const chartSpan = document.querySelector(".detail-chart > span");
-  if (oldForm) {
-    oldSpan.remove();
-    oldForm.remove();
-  }
-  const detailChart = document.getElementById("detailCanvas").getContext("2d");
-  if (detailChart) {
-    const destroyBtn = document.getElementById("destroyChart");
-    destroyBtn.click();
-    chartSpan.innerText = "";
-  }
-
-  /* if (detailBox.dataset.id) {
-    const titleResponse = await fetch(
-      `/api/${detailBox.dataset.id}/details-title`
-    );
-    if (titleResponse.status === 201) {
-      const { title } = await titleResponse.json();
-      const span = document.querySelector(".detail-form span");
-      span.innerText = `할 일 쪼개기: ${title}`;
+  // input value가 없었는데 새로 생긴경우 or 있었는데 지워진 경우
+  if (
+    (detailBox.dataset.id && !detailForm) ||
+    (!detailBox.dataset.id && detailForm)
+  ) {
+    if (nameId === "todo1") {
+      todo1.blur();
+      todo1.focus();
+    }
+    if (nameId === "todo2") {
+      todo2.blur();
+      todo2.focus();
+    }
+    if (nameId === "todo3") {
+      todo3.blur();
+      todo3.focus();
+    }
+    if (nameId === "todo4") {
+      todo4.blur();
+      todo4.focus();
+    }
+    if (nameId === "todo5") {
+      todo5.blur();
+      todo5.focus();
     }
   } else {
-    const span = document.querySelector(".detail-form span");
-    if (span) {
-      span.innerText = "할 일 쪼개기:";
+    // value가 존재 했는데 title 이름만 바뀐 경우
+    if (detailBox.dataset.id) {
+      const titleResponse = await fetch(
+        `/api/${detailBox.dataset.id}/details-title`
+      );
+      if (titleResponse.status === 201) {
+        const { title } = await titleResponse.json();
+        const span = document.querySelector(".detail-form span");
+        span.innerText = `할 일 쪼개기: ${title}`;
+      }
+    } else {
+      const span = document.querySelector(".detail-form span");
+      if (span) {
+        span.innerText = "할 일 쪼개기:";
+      }
     }
-  } */
+  }
 };
 
 const handleInputKeydown = (event) => {
