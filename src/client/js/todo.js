@@ -8,9 +8,6 @@ const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
 const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoArray = [todo1, todo2, todo3, todo4, todo5];
-
-let isCommand;
-let isKeyS;
 let todoId;
 let nameId;
 
@@ -90,9 +87,33 @@ const handleTodoSubmit = async (event) => {
   chartUpdateBtn.click();
 
   // detail form title update
-  const div = document.querySelector(".detail-form");
-  if (div.dataset.id) {
-    const titleResponse = await fetch(`/api/${div.dataset.id}/details-title`);
+  const detailBox = document.querySelector(".detail-form");
+  const detailForm = document.querySelector("#detailForm");
+
+  todo1.blur();
+  todo2.blur();
+  todo3.blur();
+  todo4.blur();
+  todo5.blur();
+
+  const oldForm = document.getElementById("detailForm");
+  const oldSpan = document.getElementById("detail-title");
+  const chartSpan = document.querySelector(".detail-chart > span");
+  if (oldForm) {
+    oldSpan.remove();
+    oldForm.remove();
+  }
+  const detailChart = document.getElementById("detailCanvas").getContext("2d");
+  if (detailChart) {
+    const destroyBtn = document.getElementById("destroyChart");
+    destroyBtn.click();
+    chartSpan.innerText = "";
+  }
+
+  /* if (detailBox.dataset.id) {
+    const titleResponse = await fetch(
+      `/api/${detailBox.dataset.id}/details-title`
+    );
     if (titleResponse.status === 201) {
       const { title } = await titleResponse.json();
       const span = document.querySelector(".detail-form span");
@@ -103,7 +124,7 @@ const handleTodoSubmit = async (event) => {
     if (span) {
       span.innerText = "할 일 쪼개기:";
     }
-  }
+  } */
 };
 
 const handleInputKeydown = (event) => {
@@ -113,7 +134,7 @@ const handleInputKeydown = (event) => {
   }
 };
 
-const handleClick = (event) => {
+const handleFocus = (event) => {
   if (event.target.dataset.id) {
     todoId = event.target.dataset.id;
   } else {
@@ -129,8 +150,8 @@ todo3.addEventListener("keydown", handleInputKeydown);
 todo4.addEventListener("keydown", handleInputKeydown);
 todo5.addEventListener("keydown", handleInputKeydown);
 
-todo1.addEventListener("click", handleClick);
-todo2.addEventListener("click", handleClick);
-todo3.addEventListener("click", handleClick);
-todo4.addEventListener("click", handleClick);
-todo5.addEventListener("click", handleClick);
+todo1.addEventListener("focus", handleFocus);
+todo2.addEventListener("focus", handleFocus);
+todo3.addEventListener("focus", handleFocus);
+todo4.addEventListener("focus", handleFocus);
+todo5.addEventListener("focus", handleFocus);

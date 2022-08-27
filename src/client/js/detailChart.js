@@ -1,6 +1,7 @@
 import { Chart } from "chart.js";
 const detailChartSpan = document.querySelector(".detail-chart > span");
 export let detailChart;
+
 let achieveNumber;
 let totalNumber;
 let achieveChart;

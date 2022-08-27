@@ -9,6 +9,7 @@ const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
 const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
 const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
 const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
+const destroyBtn = document.getElementById("destroyChart");
 
 let todoId;
 let detailArray;
@@ -128,11 +129,11 @@ const paintDetailsForm = async () => {
     disabledArray = [];
   }
   const div = document.querySelector(".detail-form");
+
   if (todoId) {
     div.dataset.id = todoId;
-  } else {
-    delete div.dataset.id;
   }
+
   const newForm = document.createElement("form");
   newForm.addEventListener("submit", handleDetailsSubmit);
   newForm.id = "detailForm";
@@ -211,10 +212,14 @@ const handleSelect = async (event) => {
     todoId = null;
   }
 
+  console.log("hi");
+
   if (todoId) {
     await paintDetailsForm();
     paintDetailsChart(disabledArray, detailArray);
   } else {
+    const div = document.querySelector(".detail-form");
+    delete div.dataset.id;
     const oldForm = document.getElementById("detailForm");
     const oldSpan = document.getElementById("detail-title");
     const chartSpan = document.querySelector(".detail-chart > span");
@@ -229,13 +234,13 @@ const handleSelect = async (event) => {
   }
 };
 
-todo1.addEventListener("select", handleSelect);
-todo2.addEventListener("select", handleSelect);
-todo3.addEventListener("select", handleSelect);
-todo4.addEventListener("select", handleSelect);
-todo5.addEventListener("select", handleSelect);
-todo1.addEventListener("click", handleSelect);
-todo2.addEventListener("click", handleSelect);
-todo3.addEventListener("click", handleSelect);
-todo4.addEventListener("click", handleSelect);
-todo5.addEventListener("click", handleSelect);
+const handleDestroy = () => {
+  detailChart.destroy();
+};
+
+todo1.addEventListener("focus", handleSelect);
+todo2.addEventListener("focus", handleSelect);
+todo3.addEventListener("focus", handleSelect);
+todo4.addEventListener("focus", handleSelect);
+todo5.addEventListener("focus", handleSelect);
+destroyBtn.addEventListener("click", handleDestroy);

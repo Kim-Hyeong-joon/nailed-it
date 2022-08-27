@@ -56,9 +56,10 @@ block content
             canvas(width="300", height="300")#detailCanvas
             span
     div#updateChart
+    div#destroyChart
 
 block scripts 
     script(src="/static/js/todo.js")
     script(src="/static/js/todoChart.js")
     script(src="/static/js/details.js")
-    script(src="/static/js/detailChart.js")
+    script(type="module" src="/static/js/detailChart.js")
