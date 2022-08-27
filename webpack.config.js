@@ -7,9 +7,9 @@ module.exports = {
   entry: {
     main: BASE_JS + "main.js",
     details: BASE_JS + "details.js",
-    chart: BASE_JS + "chart.js",
+    todoChart: BASE_JS + "todoChart.js",
     todo: BASE_JS + "todo.js",
-    chartModule: BASE_JS + "chartModule.js",
+    detailChart: BASE_JS + "detailChart.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

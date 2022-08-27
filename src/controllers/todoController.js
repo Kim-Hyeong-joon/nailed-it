@@ -84,23 +84,14 @@ export const postTodos = async (req, res) => {
 export const postDetails = async (req, res) => {
   const {
     params: { id },
-    body: {
-      detail1Value,
-      detail2Value,
-      detail3Value,
-      detail4Value,
-      detail5Value,
-    },
+    body: { details, detailsDisabled },
   } = req;
 
-  const details = [
-    detail1Value,
-    detail2Value,
-    detail3Value,
-    detail4Value,
-    detail5Value,
-  ];
-  const todo = await Todo.findByIdAndUpdate(id, { details }, { new: true });
+  const todo = await Todo.findByIdAndUpdate(
+    id,
+    { details, detailsDisabled },
+    { new: true }
+  );
 
   if (!todo) {
     return res.sendStatus(404);
@@ -115,9 +106,9 @@ export const loadDetails = async (req, res) => {
   if (!todo) {
     return res.sendStatus(404);
   }
-  const details = todo.details;
+  const { details, detailsDisabled } = todo;
   const title = todo.todo;
-  return res.status(201).json({ details, title });
+  return res.status(201).json({ details, detailsDisabled, title });
 };
 
 export const loadDetailTitle = async (req, res) => {

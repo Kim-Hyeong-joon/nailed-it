@@ -100,7 +100,9 @@ const handleTodoSubmit = async (event) => {
     }
   } else {
     const span = document.querySelector(".detail-form span");
-    span.innerText = "할 일 쪼개기:";
+    if (span) {
+      span.innerText = "할 일 쪼개기:";
+    }
   }
 };
 

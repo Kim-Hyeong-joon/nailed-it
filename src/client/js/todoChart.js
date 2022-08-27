@@ -49,7 +49,9 @@ let achieveChart = (achieveNumber / totalNumber) * 100; // 초기 차트 셋팅�
 let todoChart;
 const achievePercent = () => (achieveNumber / totalNumber) * 100;
 
-spanPercent.innerText = `${achieveChart}%`;
+if (achieveChart && achieveChart !== Infinity) {
+  spanPercent.innerText = `${achieveChart}%`;
+}
 
 // -------- Chart 생성 -----------
 todoChart = new Chart(ctx, {
@@ -102,7 +104,9 @@ const handleCheckClick = (event) => {
 
   achieveChart = achievePercent(achieveNumber);
 
-  spanPercent.innerText = `${achieveChart}%`;
+  if (achieveChart && achieveChart !== Infinity) {
+    spanPercent.innerText = `${achieveChart}%`;
+  }
 
   todoChart.data.datasets[0].data[0] = parseInt(achieveChart);
   todoChart.data.datasets[0].data[1] = 100 - parseInt(achieveChart);
@@ -120,7 +124,10 @@ const handleUpdateTotalTodos = () => {
   ).length;
 
   achieveChart = achievePercent();
-  spanPercent.innerText = `${achieveChart}%`;
+  if (achieveChart && achieveChart !== Infinity) {
+    spanPercent.innerText = `${achieveChart}%`;
+  }
+
   todoChart.data.datasets[0].data[0] = parseInt(achieveChart);
   todoChart.data.datasets[0].data[1] = 100 - parseInt(achieveChart);
 

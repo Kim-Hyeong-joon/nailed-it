@@ -1,4 +1,9 @@
-import { Chart } from "chart.js";
+import {
+  chartUpdate,
+  paintDetailsChart,
+  updateTotalDetails,
+  detailChart,
+} from "./detailChart";
 const todo1 = document.querySelector(".todo-form__todo:nth-child(1) > input");
 const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
 const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
@@ -8,7 +13,7 @@ const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
 let todoId;
 let detailArray;
 let todoTitle;
-let detailChart;
+let disabledArray;
 
 const handleDetailsSubmit = async (event) => {
   event.preventDefault();
@@ -30,36 +35,48 @@ const handleDetailsSubmit = async (event) => {
   const detail5 = document.querySelector(
     ".detail-form__detail:nth-child(5) > input"
   );
-  if (detail1.value === "") {
-    return;
-  }
-  const detail1Value = detail1.value;
-  const detail2Value = detail2.value;
-  const detail3Value = detail3.value;
-  const detail4Value = detail4.value;
-  const detail5Value = detail5.value;
-  await fetch(`/api/${todoId}/details`, {
+
+  const details = [
+    detail1.value,
+    detail2.value,
+    detail3.value,
+    detail4.value,
+    detail5.value,
+  ];
+
+  const detailsDisabled = [
+    detail1.disabled,
+    detail2.disabled,
+    detail3.disabled,
+    detail4.disabled,
+    detail5.disabled,
+  ];
+
+  const response = await fetch(`/api/${todoId}/details`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      detail1Value,
-      detail2Value,
-      detail3Value,
-      detail4Value,
-      detail5Value,
+      details,
+      detailsDisabled,
     }),
   });
+  if (response.status === 201) {
+    updateTotalDetails(details);
+  }
 };
 
-const createDetail = (detailNumber, detailContent) => {
+const createDetail = (detailNumber, detailContent, detailDisabled) => {
   // detail input HTML 생성하는 함수
   const detail = document.createElement("input");
   detail.placeholder = `${detailNumber}.`;
   detail.name = `detail${detailNumber}`;
   detail.autocomplete = "off";
   detail.spellcheck = false;
+  if (detailDisabled) {
+    detail.disabled = "true";
+  }
   if (detailContent) {
     detail.value = detailContent;
   }
@@ -71,8 +88,22 @@ const handleDetailsEnter = (event) => {
     event.preventDefault();
     const detailSubmit = document.getElementById("detailSubmit");
     detailSubmit.click();
-    console.log("?");
   }
+};
+
+const handleDetailCheckClick = (event) => {
+  event.preventDefault();
+  const detail = event.target.parentElement.querySelector("input");
+
+  if (detail.disabled) {
+    detail.disabled = false;
+  } else {
+    detail.disabled = true;
+  }
+
+  chartUpdate(detail);
+  const detailSubmit = document.getElementById("detailSubmit");
+  detailSubmit.click();
 };
 
 const paintDetailsForm = async () => {
@@ -87,12 +118,14 @@ const paintDetailsForm = async () => {
   if (todoId) {
     const response = await fetch(`/api/${todoId}/load-details`);
     if (response.status === 201) {
-      const { details, title } = await response.json();
+      const { details, detailsDisabled, title } = await response.json();
       detailArray = details;
       todoTitle = title;
+      disabledArray = detailsDisabled;
     }
   } else {
     detailArray = []; // todoId가 없을 경우(todo가 비어있을 경우) detailArray 삭제
+    disabledArray = [];
   }
   const div = document.querySelector(".detail-form");
   if (todoId) {
@@ -115,20 +148,25 @@ const paintDetailsForm = async () => {
   div4.className = "detail-form__detail";
   const div5 = document.createElement("div");
   div5.className = "detail-form__detail";
-  const detail1 = createDetail("1", detailArray[0]);
-  const detail2 = createDetail("2", detailArray[1]);
-  const detail3 = createDetail("3", detailArray[2]);
-  const detail4 = createDetail("4", detailArray[3]);
-  const detail5 = createDetail("5", detailArray[4]);
+  const detail1 = createDetail("1", detailArray[0], disabledArray[0]);
+  const detail2 = createDetail("2", detailArray[1], disabledArray[1]);
+  const detail3 = createDetail("3", detailArray[2], disabledArray[2]);
+  const detail4 = createDetail("4", detailArray[3], disabledArray[3]);
+  const detail5 = createDetail("5", detailArray[4], disabledArray[4]);
   const btn1 = document.createElement("button");
-  btn1.innerText = "✔️";
   const btn2 = document.createElement("button");
-  btn2.innerText = "✔️";
   const btn3 = document.createElement("button");
-  btn3.innerText = "✔️";
   const btn4 = document.createElement("button");
-  btn4.innerText = "✔️";
   const btn5 = document.createElement("button");
+  btn1.addEventListener("click", handleDetailCheckClick);
+  btn2.addEventListener("click", handleDetailCheckClick);
+  btn3.addEventListener("click", handleDetailCheckClick);
+  btn4.addEventListener("click", handleDetailCheckClick);
+  btn5.addEventListener("click", handleDetailCheckClick);
+  btn1.innerText = "✔️";
+  btn2.innerText = "✔️";
+  btn3.innerText = "✔️";
+  btn4.innerText = "✔️";
   btn5.innerText = "✔️";
   const submit = document.createElement("input");
   submit.type = "submit";
@@ -166,51 +204,29 @@ const paintDetailsForm = async () => {
   detail5.addEventListener("keydown", handleDetailsEnter);
 };
 
-const paintDetailsChart = () => {
-  const ctx = document.getElementById("detailCanvas");
-  detailChart = new Chart(ctx, {
-    type: "pie",
-    data: {
-      labels: ["해낸 일", "해낼 일"],
-      datasets: [
-        {
-          label: "Nailed It",
-          data: [20, 80],
-          backgroundColor: ["green", "teal"],
-          borderWidth: 0.5,
-          borderColor: "black",
-        },
-      ],
-    },
-    options: {
-      title: { display: true, text: "Nailed It!", fontsize: 20 },
-      legend: { display: true, position: "bottom" },
-      tooltips: {
-        enabled: false,
-      },
-      layout: {
-        padding: {
-          left: 10,
-          right: 10,
-          top: 20,
-          bottom: 0,
-        },
-      },
-      animation: {
-        duration: 1500,
-      },
-    },
-  });
-};
-
-const handleSelect = (event) => {
+const handleSelect = async (event) => {
   if (event.target.dataset.id) {
     todoId = event.target.dataset.id;
   } else {
     todoId = null;
   }
-  paintDetailsForm();
-  paintDetailsChart();
+
+  if (todoId) {
+    await paintDetailsForm();
+    paintDetailsChart(disabledArray, detailArray);
+  } else {
+    const oldForm = document.getElementById("detailForm");
+    const oldSpan = document.getElementById("detail-title");
+    const chartSpan = document.querySelector(".detail-chart > span");
+    if (oldForm) {
+      oldSpan.remove();
+      oldForm.remove();
+    }
+    if (detailChart) {
+      detailChart.destroy();
+      chartSpan.innerText = "";
+    }
+  }
 };
 
 todo1.addEventListener("select", handleSelect);
