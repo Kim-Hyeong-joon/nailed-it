@@ -21,7 +21,12 @@ export const home = async (req, res) => {
   });
 };
 
-const createOrUpdateTodo = async (todo, name, todoDisabled) => {
+const createOrUpdateTodo = async (
+  todo,
+  name,
+  todoDisabled,
+  todoTriggerValue
+) => {
   if (todo) {
     // todo form의 value가 들어왔을 경우
     const existTodo = await Todo.exists({ nameId: name });
@@ -32,6 +37,7 @@ const createOrUpdateTodo = async (todo, name, todoDisabled) => {
         {
           todo: todo,
           disabled: todoDisabled,
+          todoTriggerValue: todoTriggerValue,
         },
         { new: true }
       );
@@ -42,6 +48,7 @@ const createOrUpdateTodo = async (todo, name, todoDisabled) => {
         todo: todo,
         nameId: name,
         disabled: todoDisabled,
+        todoTriggerValue: todoTriggerValue,
       });
       return todoObj;
     }
@@ -68,15 +75,45 @@ export const postTodos = async (req, res) => {
     todo3Disabled,
     todo4Disabled,
     todo5Disabled,
+    todo1TriggerValue,
+    todo2TriggerValue,
+    todo3TriggerValue,
+    todo4TriggerValue,
+    todo5TriggerValue,
   } = req.body;
 
-  //console.log("hi");
+  console.log(todo1TriggerValue);
 
-  const todo1 = await createOrUpdateTodo(todo1Value, "todo1", todo1Disabled);
-  const todo2 = await createOrUpdateTodo(todo2Value, "todo2", todo2Disabled);
-  const todo3 = await createOrUpdateTodo(todo3Value, "todo3", todo3Disabled);
-  const todo4 = await createOrUpdateTodo(todo4Value, "todo4", todo4Disabled);
-  const todo5 = await createOrUpdateTodo(todo5Value, "todo5", todo5Disabled);
+  const todo1 = await createOrUpdateTodo(
+    todo1Value,
+    "todo1",
+    todo1Disabled,
+    todo1TriggerValue
+  );
+  const todo2 = await createOrUpdateTodo(
+    todo2Value,
+    "todo2",
+    todo2Disabled,
+    todo2TriggerValue
+  );
+  const todo3 = await createOrUpdateTodo(
+    todo3Value,
+    "todo3",
+    todo3Disabled,
+    todo3TriggerValue
+  );
+  const todo4 = await createOrUpdateTodo(
+    todo4Value,
+    "todo4",
+    todo4Disabled,
+    todo4TriggerValue
+  );
+  const todo5 = await createOrUpdateTodo(
+    todo5Value,
+    "todo5",
+    todo5Disabled,
+    todo5TriggerValue
+  );
   const todos = [todo1, todo2, todo3, todo4, todo5];
 
   return res.status(201).json({
@@ -87,12 +124,12 @@ export const postTodos = async (req, res) => {
 export const postDetails = async (req, res) => {
   const {
     params: { id },
-    body: { details, detailsDisabled },
+    body: { details, detailsDisabled, detailTriggers },
   } = req;
 
   const todo = await Todo.findByIdAndUpdate(
     id,
-    { details, detailsDisabled },
+    { details, detailsDisabled, detailTriggers },
     { new: true }
   );
 
@@ -109,9 +146,11 @@ export const loadDetails = async (req, res) => {
   if (!todo) {
     return res.sendStatus(404);
   }
-  const { details, detailsDisabled } = todo;
+  const { details, detailsDisabled, detailTriggers } = todo;
   const title = todo.todo;
-  return res.status(201).json({ details, detailsDisabled, title });
+  return res
+    .status(201)
+    .json({ details, detailsDisabled, title, detailTriggers });
 };
 
 export const loadDetailTitle = async (req, res) => {

@@ -1,6 +1,11 @@
 import { Chart } from "chart.js";
 const detailChartSpan = document.querySelector(".detail-chart > span");
 export let detailChart;
+export const detailChartDestroy = () => {
+  detailChart.clear();
+  detailChart.destroy();
+  detailChart = null;
+};
 
 let achieveNumber;
 let totalNumber;

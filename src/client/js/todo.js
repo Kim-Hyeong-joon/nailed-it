@@ -1,10 +1,35 @@
 const todoForm = document.querySelector(".todo-form");
 const submitTodo = document.getElementById("submitTodo");
-const todo1 = document.querySelector(".todo-form__todo:nth-child(1) > input");
-const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
-const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
-const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
-const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
+const todo1 = document.querySelector(
+  ".todo-form__todo:nth-child(1) > input:nth-child(2)"
+);
+const todo2 = document.querySelector(
+  ".todo-form__todo:nth-child(2) > input:nth-child(2)"
+);
+const todo3 = document.querySelector(
+  ".todo-form__todo:nth-child(3) > input:nth-child(2)"
+);
+const todo4 = document.querySelector(
+  ".todo-form__todo:nth-child(4) > input:nth-child(2)"
+);
+const todo5 = document.querySelector(
+  ".todo-form__todo:nth-child(5) > input:nth-child(2)"
+);
+const todo1Trigger = document.querySelector(
+  ".todo-form__todo:nth-child(1) > input:nth-child(1)"
+);
+const todo2Trigger = document.querySelector(
+  ".todo-form__todo:nth-child(2) > input:nth-child(1)"
+);
+const todo3Trigger = document.querySelector(
+  ".todo-form__todo:nth-child(3) > input:nth-child(1)"
+);
+const todo4Trigger = document.querySelector(
+  ".todo-form__todo:nth-child(4) > input:nth-child(1)"
+);
+const todo5Trigger = document.querySelector(
+  ".todo-form__todo:nth-child(5) > input:nth-child(1)"
+);
 const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoArray = [todo1, todo2, todo3, todo4, todo5];
@@ -49,6 +74,11 @@ const handleTodoSubmit = async (event) => {
   const todo3Disabled = todo3.disabled;
   const todo4Disabled = todo4.disabled;
   const todo5Disabled = todo5.disabled;
+  const todo1TriggerValue = todo1Trigger.value;
+  const todo2TriggerValue = todo2Trigger.value;
+  const todo3TriggerValue = todo3Trigger.value;
+  const todo4TriggerValue = todo4Trigger.value;
+  const todo5TriggerValue = todo5Trigger.value;
   const response = await fetch(`/api/todos`, {
     method: "POST",
     headers: {
@@ -65,6 +95,11 @@ const handleTodoSubmit = async (event) => {
       todo3Disabled,
       todo4Disabled,
       todo5Disabled,
+      todo1TriggerValue,
+      todo2TriggerValue,
+      todo3TriggerValue,
+      todo4TriggerValue,
+      todo5TriggerValue,
     }),
   });
 
@@ -148,7 +183,6 @@ const handleInputKeydown = (event) => {
   if (event.code === "Enter") {
     event.preventDefault();
     submitTodo.click();
-    console.log("hi");
   }
 };
 
@@ -167,6 +201,11 @@ todo2.addEventListener("keypress", handleInputKeydown);
 todo3.addEventListener("keypress", handleInputKeydown);
 todo4.addEventListener("keypress", handleInputKeydown);
 todo5.addEventListener("keypress", handleInputKeydown);
+todo1Trigger.addEventListener("keypress", handleInputKeydown);
+todo2Trigger.addEventListener("keypress", handleInputKeydown);
+todo3Trigger.addEventListener("keypress", handleInputKeydown);
+todo4Trigger.addEventListener("keypress", handleInputKeydown);
+todo5Trigger.addEventListener("keypress", handleInputKeydown);
 
 todo1.addEventListener("focus", handleFocus);
 todo2.addEventListener("focus", handleFocus);

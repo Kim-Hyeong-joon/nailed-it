@@ -31,3 +31,15 @@ button {
 .detail-chart {
   margin-left: 50px;
 }
+
+input {
+  width: 270px;
+}
+
+.todo-form__todo > input:nth-child(1) {
+  margin-right: 10px;
+}
+
+.detail-form__detail > input:nth-child(1) {
+  margin-right: 10px;
+}

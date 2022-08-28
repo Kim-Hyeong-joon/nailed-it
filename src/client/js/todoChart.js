@@ -5,11 +5,21 @@ const btn2 = document.querySelector(".todo-form__todo:nth-child(2) > button");
 const btn3 = document.querySelector(".todo-form__todo:nth-child(3) > button");
 const btn4 = document.querySelector(".todo-form__todo:nth-child(4) > button");
 const btn5 = document.querySelector(".todo-form__todo:nth-child(5) > button");
-const todo1 = document.querySelector(".todo-form__todo:nth-child(1) > input");
-const todo2 = document.querySelector(".todo-form__todo:nth-child(2) > input");
-const todo3 = document.querySelector(".todo-form__todo:nth-child(3) > input");
-const todo4 = document.querySelector(".todo-form__todo:nth-child(4) > input");
-const todo5 = document.querySelector(".todo-form__todo:nth-child(5) > input");
+const todo1 = document.querySelector(
+  ".todo-form__todo:nth-child(1) > input:nth-child(2)"
+);
+const todo2 = document.querySelector(
+  ".todo-form__todo:nth-child(2) > input:nth-child(2)"
+);
+const todo3 = document.querySelector(
+  ".todo-form__todo:nth-child(3) > input:nth-child(2)"
+);
+const todo4 = document.querySelector(
+  ".todo-form__todo:nth-child(4) > input:nth-child(2)"
+);
+const todo5 = document.querySelector(
+  ".todo-form__todo:nth-child(5) > input:nth-child(2)"
+);
 const spanPercent = document.querySelector(".percentage-box > span");
 const chartUpdateBtn = document.getElementById("updateChart");
 
@@ -92,13 +102,15 @@ todoChart = new Chart(ctx, {
 // -------- check box에 click event가 발생 했을 때
 const handleCheckClick = (event) => {
   event.preventDefault();
-  const todo = event.target.parentElement.querySelector("input");
+  const todos = event.target.parentElement.querySelectorAll("input");
 
-  if (todo.disabled) {
-    todo.disabled = false;
+  if (todos[1].disabled) {
+    todos[0].disabled = false;
+    todos[1].disabled = false;
     achieveNumber -= 1;
   } else {
-    todo.disabled = true;
+    todos[0].disabled = true;
+    todos[1].disabled = true;
     achieveNumber += 1;
   }
 
@@ -106,6 +118,10 @@ const handleCheckClick = (event) => {
 
   if (achieveChart && achieveChart !== Infinity) {
     spanPercent.innerText = `${achieveChart}%`;
+  }
+
+  if (achieveChart === 0) {
+    spanPercent.innerText = "0%";
   }
 
   todoChart.data.datasets[0].data[0] = parseInt(achieveChart);
