@@ -39,7 +39,6 @@ const detailFormIdUpdate = (todoObj, arrayIndex, todoNameId) => {
 // todo form POST
 const handleTodoSubmit = async (event) => {
   event.preventDefault();
-
   const todo1Value = todo1.value;
   const todo2Value = todo2.value;
   const todo3Value = todo3.value;
@@ -97,23 +96,33 @@ const handleTodoSubmit = async (event) => {
   ) {
     if (nameId === "todo1") {
       todo1.blur();
-      todo1.focus();
+      setTimeout(() => {
+        todo1.focus();
+      }, 10);
     }
     if (nameId === "todo2") {
       todo2.blur();
-      todo2.focus();
+      setTimeout(() => {
+        todo2.focus();
+      }, 10);
     }
     if (nameId === "todo3") {
       todo3.blur();
-      todo3.focus();
+      setTimeout(() => {
+        todo3.focus();
+      }, 10);
     }
     if (nameId === "todo4") {
       todo4.blur();
-      todo4.focus();
+      setTimeout(() => {
+        todo4.focus();
+      }, 10);
     }
     if (nameId === "todo5") {
       todo5.blur();
-      todo5.focus();
+      setTimeout(() => {
+        todo5.focus();
+      }, 10);
     }
   } else {
     // value가 존재 했는데 title 이름만 바뀐 경우
@@ -139,6 +148,7 @@ const handleInputKeydown = (event) => {
   if (event.code === "Enter") {
     event.preventDefault();
     submitTodo.click();
+    console.log("hi");
   }
 };
 
@@ -152,11 +162,11 @@ const handleFocus = (event) => {
 };
 
 todoForm.addEventListener("submit", handleTodoSubmit);
-todo1.addEventListener("keydown", handleInputKeydown);
-todo2.addEventListener("keydown", handleInputKeydown);
-todo3.addEventListener("keydown", handleInputKeydown);
-todo4.addEventListener("keydown", handleInputKeydown);
-todo5.addEventListener("keydown", handleInputKeydown);
+todo1.addEventListener("keypress", handleInputKeydown);
+todo2.addEventListener("keypress", handleInputKeydown);
+todo3.addEventListener("keypress", handleInputKeydown);
+todo4.addEventListener("keypress", handleInputKeydown);
+todo5.addEventListener("keypress", handleInputKeydown);
 
 todo1.addEventListener("focus", handleFocus);
 todo2.addEventListener("focus", handleFocus);

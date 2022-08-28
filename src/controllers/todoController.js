@@ -21,14 +21,14 @@ export const home = async (req, res) => {
   });
 };
 
-const createOrUpdateTodo = async (todo, nameId, todoDisabled) => {
+const createOrUpdateTodo = async (todo, name, todoDisabled) => {
   if (todo) {
     // todo form의 value가 들어왔을 경우
-    const existTodo = await Todo.exists({ nameId: nameId });
+    const existTodo = await Todo.exists({ nameId: name });
     if (existTodo) {
       // 기존 todo 있는지 확인
       const todoObj = await Todo.findOneAndUpdate(
-        { nameId: nameId },
+        { nameId: name },
         {
           todo: todo,
           disabled: todoDisabled,
@@ -40,17 +40,17 @@ const createOrUpdateTodo = async (todo, nameId, todoDisabled) => {
       const todoObj = await Todo.create({
         // 없으면 새로 Create
         todo: todo,
-        nameId: nameId,
+        nameId: name,
         disabled: todoDisabled,
       });
       return todoObj;
     }
   } else {
     // 만약 todo form의 value가 없다면
-    const existTodo = await Todo.exists({ nameId: nameId });
+    const existTodo = await Todo.exists({ nameId: name });
     if (existTodo) {
       // 해당 todo 존재 확인
-      await Todo.findOneAndDelete({ nameId: nameId });
+      await Todo.findOneAndDelete({ nameId: name });
     }
     return null;
   }
@@ -70,14 +70,17 @@ export const postTodos = async (req, res) => {
     todo5Disabled,
   } = req.body;
 
+  //console.log("hi");
+
   const todo1 = await createOrUpdateTodo(todo1Value, "todo1", todo1Disabled);
   const todo2 = await createOrUpdateTodo(todo2Value, "todo2", todo2Disabled);
   const todo3 = await createOrUpdateTodo(todo3Value, "todo3", todo3Disabled);
   const todo4 = await createOrUpdateTodo(todo4Value, "todo4", todo4Disabled);
   const todo5 = await createOrUpdateTodo(todo5Value, "todo5", todo5Disabled);
+  const todos = [todo1, todo2, todo3, todo4, todo5];
 
   return res.status(201).json({
-    todos: [todo1, todo2, todo3, todo4, todo5],
+    todos,
   });
 };
 
