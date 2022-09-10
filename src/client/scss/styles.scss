@@ -34,6 +34,13 @@ button {
 
 input {
   width: 270px;
+  background-color: inherit;
+}
+
+input:disabled {
+  text-decoration-line: line-through;
+  background-color: inherit;
+  color: black;
 }
 
 .todo-form__todo > input:nth-child(1) {

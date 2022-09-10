@@ -82,8 +82,6 @@ export const postTodos = async (req, res) => {
     todo5TriggerValue,
   } = req.body;
 
-  console.log(todo1TriggerValue);
-
   const todo1 = await createOrUpdateTodo(
     todo1Value,
     "todo1",

@@ -170,11 +170,17 @@ const handleDetailCheckClick = (event) => {
 };
 
 const paintDetailsForm = async () => {
+  // 기존 form, chart 지우기
   const oldForm = document.getElementById("detailForm");
   const oldSpan = document.getElementById("detail-title");
+  const chartSpan = document.querySelector(".detail-chart > span");
   if (oldForm) {
     oldSpan.remove();
     oldForm.remove();
+  }
+  if (detailChart) {
+    detailChartDestroy();
+    chartSpan.innerText = "";
   }
 
   // server에서 details 불러오기
@@ -332,14 +338,8 @@ const handleSelect = async (event) => {
   }
 };
 
-const handleDestroy = () => {
-  //detailChart.destroy();
-  console.log("?");
-};
-
 todo1.addEventListener("focus", handleSelect);
 todo2.addEventListener("focus", handleSelect);
 todo3.addEventListener("focus", handleSelect);
 todo4.addEventListener("focus", handleSelect);
 todo5.addEventListener("focus", handleSelect);
-destroyBtn.addEventListener("click", handleDestroy);
