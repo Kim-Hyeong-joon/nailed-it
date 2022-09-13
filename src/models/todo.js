@@ -8,6 +8,7 @@ const todoSchema = new mongoose.Schema({
   details: [{ type: String }],
   detailsDisabled: [{ type: Boolean }],
   detailTriggers: [{ type: String }],
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true },
 });
 
 const Todo = mongoose.model("Todo", todoSchema);

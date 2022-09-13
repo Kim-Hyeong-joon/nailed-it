@@ -3,6 +3,8 @@ import morgan from "morgan";
 import rootRouter from "./routers/rootRouter";
 import apiRouter from "./routers/apiRouter";
 import session from "express-session";
+import MongoStore from "connect-mongo";
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
 const logger = morgan("dev");
@@ -15,12 +17,14 @@ app.use(express.json());
 
 app.use(
   session({
-    secret: "Hello!",
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.DB_URL }),
   })
 );
 
+app.use(localsMiddleware);
 app.use("/static", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/api", apiRouter);

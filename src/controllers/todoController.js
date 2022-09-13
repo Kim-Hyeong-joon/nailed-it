@@ -1,10 +1,15 @@
+import req from "express/lib/request";
 import Todo from "../models/Todo";
+import User from "../models/User";
 
 const findTodo = (todo) => {
   return Todo.findOne({ nameId: todo });
 };
 
 export const home = async (req, res) => {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
   const todo1 = await findTodo("todo1");
   const todo2 = await findTodo("todo2");
   const todo3 = await findTodo("todo3");
@@ -25,7 +30,9 @@ const createOrUpdateTodo = async (
   todo,
   name,
   todoDisabled,
-  todoTriggerValue
+  todoTriggerValue,
+  req,
+  userTodoIndex
 ) => {
   if (todo) {
     // todo form의 value가 들어왔을 경우
@@ -41,6 +48,7 @@ const createOrUpdateTodo = async (
         },
         { new: true }
       );
+
       return todoObj;
     } else {
       const todoObj = await Todo.create({
@@ -49,7 +57,11 @@ const createOrUpdateTodo = async (
         nameId: name,
         disabled: todoDisabled,
         todoTriggerValue: todoTriggerValue,
+        owner: req.session.user._id,
       });
+      const user = await User.findById(req.session.user._id);
+      user.todos[userTodoIndex] = todoObj._id;
+      await user.save();
       return todoObj;
     }
   } else {
@@ -65,28 +77,35 @@ const createOrUpdateTodo = async (
 
 export const postTodos = async (req, res) => {
   const {
-    todo1Value,
-    todo2Value,
-    todo3Value,
-    todo4Value,
-    todo5Value,
-    todo1Disabled,
-    todo2Disabled,
-    todo3Disabled,
-    todo4Disabled,
-    todo5Disabled,
-    todo1TriggerValue,
-    todo2TriggerValue,
-    todo3TriggerValue,
-    todo4TriggerValue,
-    todo5TriggerValue,
-  } = req.body;
+    body: {
+      todo1Value,
+      todo2Value,
+      todo3Value,
+      todo4Value,
+      todo5Value,
+      todo1Disabled,
+      todo2Disabled,
+      todo3Disabled,
+      todo4Disabled,
+      todo5Disabled,
+      todo1TriggerValue,
+      todo2TriggerValue,
+      todo3TriggerValue,
+      todo4TriggerValue,
+      todo5TriggerValue,
+    },
+    session: {
+      user: { _id },
+    },
+  } = req;
 
   const todo1 = await createOrUpdateTodo(
     todo1Value,
     "todo1",
     todo1Disabled,
-    todo1TriggerValue
+    todo1TriggerValue,
+    req,
+    0
   );
   const todo2 = await createOrUpdateTodo(
     todo2Value,

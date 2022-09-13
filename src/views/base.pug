@@ -4,10 +4,18 @@ html(lang="ko")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{pageTitle} | Nailed it!
+        title #{pageTitle} | #{siteName}
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
         link(rel="stylesheet" href="/static/css/styles.css")
     body
+        nav
+            a(href="/home") 홈
+            if loggedIn
+                a(href="/logout") 로그아웃
+                a(href="/my-profile") #{loggedInUser.nickname}의 프로필
+            else
+                a(href="/join") 회원가입
+                a(href="/login") 로그인
         main 
             block content
         include partials/footer
