@@ -12,11 +12,27 @@ export const home = async (req, res) => {
 
   const user = await User.findById(req.session.user._id);
 
-  const todo1 = await Todo.findById(user.todos[0]);
-  const todo2 = await Todo.findById(user.todos[1]);
-  const todo3 = await Todo.findById(user.todos[2]);
-  const todo4 = await Todo.findById(user.todos[3]);
-  const todo5 = await Todo.findById(user.todos[4]);
+  let todo1;
+  let todo2;
+  let todo3;
+  let todo4;
+  let todo5;
+
+  if (user.todos[0]) {
+    todo1 = await Todo.findById(user.todos[0]);
+  }
+  if (user.todos[1]) {
+    todo2 = await Todo.findById(user.todos[1]);
+  }
+  if (user.todos[2]) {
+    todo3 = await Todo.findById(user.todos[2]);
+  }
+  if (user.todos[3]) {
+    todo4 = await Todo.findById(user.todos[3]);
+  }
+  if (user.todos[4]) {
+    todo5 = await Todo.findById(user.todos[4]);
+  }
 
   return res.render("home", {
     pageTitle: "Home",
@@ -73,6 +89,7 @@ const createOrUpdateTodo = async (
     if (todoId) {
       // 해당 todo 존재 확인
       user.todos[userTodoIndex] = "";
+      await user.save();
       await Todo.findByIdAndDelete(todoId);
     }
     return null;
