@@ -9,7 +9,7 @@ html(lang="ko")
         link(rel="stylesheet" href="/static/css/styles.css")
     body
         nav
-            a(href="/home") 홈
+            a(href="/") 홈
             if loggedIn
                 a(href="/logout") 로그아웃
                 a(href="/my-profile") #{loggedInUser.nickname}의 프로필

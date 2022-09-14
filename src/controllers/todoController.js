@@ -1,4 +1,3 @@
-import req from "express/lib/request";
 import Todo from "../models/Todo";
 import User from "../models/User";
 
@@ -7,9 +6,16 @@ const findTodo = (todo) => {
 };
 
 export const home = async (req, res) => {
+  /* const user1 = await User.findById(req.session.user._id);
+  user1.todos = [];
+  user1.save(); */
+
   if (!req.session.user) {
     return res.redirect("/login");
   }
+
+  const user = await User.findById(req.session.user._id).populate("todos");
+
   const todo1 = await findTodo("todo1");
   const todo2 = await findTodo("todo2");
   const todo3 = await findTodo("todo3");
@@ -18,6 +24,7 @@ export const home = async (req, res) => {
 
   return res.render("home", {
     pageTitle: "Home",
+    user,
     todo1,
     todo2,
     todo3,
@@ -36,11 +43,12 @@ const createOrUpdateTodo = async (
 ) => {
   if (todo) {
     // todo form의 value가 들어왔을 경우
-    const existTodo = await Todo.exists({ nameId: name });
-    if (existTodo) {
+    const user = await User.findById(req.session.user._id);
+    const todoId = user.todos[userTodoIndex];
+    if (todoId) {
       // 기존 todo 있는지 확인
-      const todoObj = await Todo.findOneAndUpdate(
-        { nameId: name },
+      const todoObj = await Todo.findByIdAndUpdate(
+        todoId,
         {
           todo: todo,
           disabled: todoDisabled,
@@ -48,7 +56,6 @@ const createOrUpdateTodo = async (
         },
         { new: true }
       );
-
       return todoObj;
     } else {
       const todoObj = await Todo.create({
@@ -66,10 +73,10 @@ const createOrUpdateTodo = async (
     }
   } else {
     // 만약 todo form의 value가 없다면
-    const existTodo = await Todo.exists({ nameId: name });
-    if (existTodo) {
+    const todoId = user.todos[userTodoIndex];
+    if (todoId) {
       // 해당 todo 존재 확인
-      await Todo.findOneAndDelete({ nameId: name });
+      await Todo.findByIdAndDelete(todoId);
     }
     return null;
   }
@@ -77,27 +84,22 @@ const createOrUpdateTodo = async (
 
 export const postTodos = async (req, res) => {
   const {
-    body: {
-      todo1Value,
-      todo2Value,
-      todo3Value,
-      todo4Value,
-      todo5Value,
-      todo1Disabled,
-      todo2Disabled,
-      todo3Disabled,
-      todo4Disabled,
-      todo5Disabled,
-      todo1TriggerValue,
-      todo2TriggerValue,
-      todo3TriggerValue,
-      todo4TriggerValue,
-      todo5TriggerValue,
-    },
-    session: {
-      user: { _id },
-    },
-  } = req;
+    todo1Value,
+    todo2Value,
+    todo3Value,
+    todo4Value,
+    todo5Value,
+    todo1Disabled,
+    todo2Disabled,
+    todo3Disabled,
+    todo4Disabled,
+    todo5Disabled,
+    todo1TriggerValue,
+    todo2TriggerValue,
+    todo3TriggerValue,
+    todo4TriggerValue,
+    todo5TriggerValue,
+  } = req.body;
 
   const todo1 = await createOrUpdateTodo(
     todo1Value,
@@ -111,25 +113,33 @@ export const postTodos = async (req, res) => {
     todo2Value,
     "todo2",
     todo2Disabled,
-    todo2TriggerValue
+    todo2TriggerValue,
+    req,
+    1
   );
   const todo3 = await createOrUpdateTodo(
     todo3Value,
     "todo3",
     todo3Disabled,
-    todo3TriggerValue
+    todo3TriggerValue,
+    req,
+    2
   );
   const todo4 = await createOrUpdateTodo(
     todo4Value,
     "todo4",
     todo4Disabled,
-    todo4TriggerValue
+    todo4TriggerValue,
+    req,
+    3
   );
   const todo5 = await createOrUpdateTodo(
     todo5Value,
     "todo5",
     todo5Disabled,
-    todo5TriggerValue
+    todo5TriggerValue,
+    req,
+    4
   );
   const todos = [todo1, todo2, todo3, todo4, todo5];
 

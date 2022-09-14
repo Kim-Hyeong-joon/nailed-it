@@ -45,14 +45,14 @@ export const postLogin = async (req, res) => {
   const user = await User.findOne({ email });
   const pageTitle = "Login";
   if (!user) {
-    res.status(400).render("login", {
+    return res.status(400).render("login", {
       pageTitle,
       errorMessage: "존재하지 않는 이메일입니다.",
     });
   }
   const match = await bcyrpt.compare(password, user.password);
   if (!match) {
-    res.status(400).render("login", {
+    return res.status(400).render("login", {
       pageTitle,
       errorMessage: "비밀번호가 일치하지 않습니다.",
     });
