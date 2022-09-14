@@ -5,50 +5,50 @@ block content
         div
             span 해낼 일
             form(method="POST", action="/todos").todo-form
-                if user.todos[0]
+                if todo1
                     div.todo-form__todo
-                        input(type="text", name="todo1Trigger", placeholder="구체적으로 언제, 어디서 할지 적어보세요!", value=user.todos[0].todoTriggerValue autocomplete="off", spellcheck="false" disabled=user.todos[0].disabled)
-                        input(type="text", name="todo1", placeholder="첫번째는 쉬운 일로 시작해보세요!", value=user.todos[0].todo, data-id=user.todos[0]._id, disabled=user.todos[0].disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo1Trigger", placeholder="구체적으로 언제, 어디서 할지 적어보세요!", value=todo1.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo1.disabled)
+                        input(type="text", name="todo1", placeholder="첫번째는 쉬운 일로 시작해보세요!", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
                         input(type="text", name="todo1Trigger", placeholder="구체적으로 언제, 어디서 할지 적어보세요!" autocomplete="off", spellcheck="false")
                         input(type="text", name="todo1", placeholder="첫번째는 쉬운 일로 시작해보세요!", autocomplete="off", spellcheck="false")
                         button ✔️
-                if user.todos[1]
+                if todo2
                     div.todo-form__todo
-                        input(type="text", name="todo2Trigger", placeholder="행동계기 2", value=user.todos[1].todoTriggerValue autocomplete="off", spellcheck="false" disabled=user.todos[1].disabled)
-                        input(type="text", name="todo2", placeholder="2.", value=user.todos[1].todo, data-id=user.todos[1]._id, disabled=user.todos[1].disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo2Trigger", placeholder="행동계기 2", value=todo2.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo2.disabled)
+                        input(type="text", name="todo2", placeholder="2.", value=todo2.todo, data-id=todo2._id, disabled=todo2.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
                         input(type="text", name="todo2Trigger", placeholder="행동계기 2" autocomplete="off", spellcheck="false")
                         input(type="text", name="todo2", placeholder="2.", autocomplete="off", spellcheck="false")
                         button ✔️
-                if user.todos[2]
+                if todo3
                     div.todo-form__todo
-                        input(type="text", name="todo3Trigger", placeholder="행동계기 3", value=user.todos[2].todoTriggerValue autocomplete="off", spellcheck="false" disabled=user.todos[2].disabled)
-                        input(type="text", name="todo3", placeholder="3.", value=user.todos[2].todo,data-id=user.todos[2]._id, disabled=user.todos[2].disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo3Trigger", placeholder="행동계기 3", value=todo3.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo3.disabled)
+                        input(type="text", name="todo3", placeholder="3.", value=todo3.todo,data-id=todo3._id, disabled=todo3.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
                         input(type="text", name="todo3Trigger", placeholder="행동계기 3" autocomplete="off", spellcheck="false")
                         input(type="text", name="todo3", placeholder="3.", autocomplete="off", spellcheck="false")
                         button ✔️
-                if user.todos[3]
+                if todo4
                     div.todo-form__todo
-                        input(type="text", name="todo4Trigger", placeholder="행동계기 4", value=user.todos[3].todoTriggerValue autocomplete="off", spellcheck="false" disabled=user.todos[3].disabled)
-                        input(type="text", name="todo4", placeholder="4.", value=user.todos[3].todo, data-id=user.todos[3]._id, disabled=user.todos[3].disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo4Trigger", placeholder="행동계기 4", value=todo4.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo4.disabled)
+                        input(type="text", name="todo4", placeholder="4.", value=todo4.todo, data-id=todo4._id, disabled=todo4.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
                         input(type="text", name="todo4Trigger", placeholder="행동계기 4" autocomplete="off", spellcheck="false")
                         input(type="text", name="todo4", placeholder="4.", autocomplete="off", spellcheck="false")
                         button ✔️
-                if user.todos[4]
+                if todo5
                     div.todo-form__todo
-                        input(type="text", name="todo5Trigger", placeholder="행동계기 5", value=user.todos[4].todoTriggerValue autocomplete="off", spellcheck="false" disabled=user.todos[4].disabled)
-                        input(type="text", name="todo5", placeholder="5.", value=user.todos[4].todo, data-id=user.todos[4]._id, disabled=user.todos[4].disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo5Trigger", placeholder="행동계기 5", value=todo5.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo5.disabled)
+                        input(type="text", name="todo5", placeholder="5.", value=todo5.todo, data-id=todo5._id, disabled=todo5.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo

@@ -1,10 +1,6 @@
 import Todo from "../models/Todo";
 import User from "../models/User";
 
-const findTodo = (todo) => {
-  return Todo.findOne({ nameId: todo });
-};
-
 export const home = async (req, res) => {
   /* const user1 = await User.findById(req.session.user._id);
   user1.todos = [];
@@ -14,17 +10,16 @@ export const home = async (req, res) => {
     return res.redirect("/login");
   }
 
-  const user = await User.findById(req.session.user._id).populate("todos");
+  const user = await User.findById(req.session.user._id);
 
-  const todo1 = await findTodo("todo1");
-  const todo2 = await findTodo("todo2");
-  const todo3 = await findTodo("todo3");
-  const todo4 = await findTodo("todo4");
-  const todo5 = await findTodo("todo5");
+  const todo1 = await Todo.findById(user.todos[0]);
+  const todo2 = await Todo.findById(user.todos[1]);
+  const todo3 = await Todo.findById(user.todos[2]);
+  const todo4 = await Todo.findById(user.todos[3]);
+  const todo5 = await Todo.findById(user.todos[4]);
 
   return res.render("home", {
     pageTitle: "Home",
-    user,
     todo1,
     todo2,
     todo3,
@@ -73,9 +68,11 @@ const createOrUpdateTodo = async (
     }
   } else {
     // 만약 todo form의 value가 없다면
+    const user = await User.findById(req.session.user._id);
     const todoId = user.todos[userTodoIndex];
     if (todoId) {
       // 해당 todo 존재 확인
+      user.todos[userTodoIndex] = "";
       await Todo.findByIdAndDelete(todoId);
     }
     return null;
