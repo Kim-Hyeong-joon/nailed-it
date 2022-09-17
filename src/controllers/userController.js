@@ -54,7 +54,7 @@ export const postLogin = async (req, res) => {
   if (!match) {
     return res.status(400).render("login", {
       pageTitle,
-      errorMessage: "비밀번호가 일치하지 않습니다..",
+      errorMessage: "비밀번호가 일치하지 않습니다.",
     });
   }
   req.session.loggedIn = true;
