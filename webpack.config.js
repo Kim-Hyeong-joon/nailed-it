@@ -4,6 +4,7 @@ const path = require("path");
 const BASE_JS = "./src/client/js/";
 
 module.exports = {
+  performance: { hints: false },
   entry: {
     main: BASE_JS + "main.js",
     details: BASE_JS + "details.js",
@@ -16,8 +17,6 @@ module.exports = {
       filename: "css/styles.css",
     }),
   ],
-  mode: "development",
-  watch: true,
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
