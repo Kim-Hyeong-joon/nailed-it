@@ -5,7 +5,6 @@ html(lang="ko")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title #{pageTitle} | #{siteName}
-        link(rel="stylesheet" href="https://unpkg.com/mvp.css")
         link(rel="stylesheet" href="/static/css/styles.css")
         meta(name="mobile-web-app-capable" content="yes")
         meta(name="apple-touch-fullscreen" content="yes")
@@ -20,7 +19,7 @@ html(lang="ko")
             a(href="/") 홈
             if loggedIn
                 a(href="/logout") 로그아웃
-                a(href="/my-profile") #{loggedInUser.nickname}의 프로필
+                a(href="/#") #{loggedInUser.nickname}
             else
                 a(href="/join") 회원가입
                 a(href="/login") 로그인

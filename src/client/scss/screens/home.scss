@@ -1,0 +1,40 @@
+.todo-box {
+  margin-top: 5vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 45vh;
+  .todo-wrapper {
+    width: 100%;
+    height: 100%;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .todo-form {
+      border: 1px solid black;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(5, 1fr) 0.5fr;
+      gap: 1px;
+      background-color: black;
+      .todo-form__todo {
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr) 30px;
+        gap: 1px;
+        background-color: black;
+        & > * {
+          border: none;
+          cursor: pointer;
+          &:hover {
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+}

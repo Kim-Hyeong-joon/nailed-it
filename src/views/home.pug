@@ -2,7 +2,7 @@ extends base
 
 block content
     div.todo-box
-        div
+        div.todo-wrapper
             span 해낼 일
             form(method="POST", action="/todos").todo-form
                 if todo1
@@ -56,14 +56,15 @@ block content
                         input(type="text", name="todo5", placeholder="5.", autocomplete="off", spellcheck="false")
                         button ✔️
                 input(type="submit" value="저장하기")#submitTodo
-        div.percentage-box
-            canvas(width="300", height="300")#percentChart
-            span 0%
+        div.todo-chart
+            div.percentage-box
+                canvas(width="300", height="300")#percentChart
+                span 0%
     
     div.detail-box
         div.detail-form
         div.detail-chart
-            canvas(width="300", height="300")#detailCanvas
+            canvas#detailCanvas
             span
     div#updateChart
     div#destroyChart
