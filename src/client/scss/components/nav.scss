@@ -7,9 +7,9 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  color: white;
+  color: black;
   padding: $sidePadding;
-  box-shadow: 0 1px 10px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.5);
   & > *:nth-child(1) {
     justify-self: start;
   }

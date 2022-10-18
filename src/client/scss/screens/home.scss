@@ -1,32 +1,35 @@
 .todo-box {
-  margin-top: 5vh;
+  margin-top: calc(5vh + 10px);
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 45vh;
+  grid-template-rows: 40vh;
   .todo-wrapper {
     width: 100%;
     height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr;
     span {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 10px 0;
+      height: 100%;
+      border: 1px solid black;
     }
     .todo-form {
-      border: 0.5px solid white;
+      border: 0.5px solid black;
       height: 100%;
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(5, 1fr) 0.5fr;
       gap: 0.5px;
-      background-color: white;
+      background-color: black;
       .todo-form__todo {
         height: 100%;
         display: grid;
         grid-template-columns: repeat(2, 1fr) 30px;
         gap: 0.5px;
-        background-color: white;
-
+        background-color: black;
         button {
           display: flex;
           justify-content: center;
@@ -34,26 +37,59 @@
           width: 100%;
           height: 100%;
         }
+        & > *:disabled {
+          text-decoration: line-through;
+        }
         & > * {
           border: none;
           cursor: pointer;
           transition: all 0.7s;
-          background-color: black;
-          color: white;
+          background-color: white;
+          color: black;
           &:hover,
           &:focus {
-            background-color: white;
-            color: black;
+            background-color: black;
+            color: white;
             box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.3);
             z-index: 1;
-          }
-          &:hover {
           }
           &:focus:not(button) {
             cursor: text;
             z-index: 1;
           }
         }
+      }
+    }
+  }
+}
+
+.detail-box {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 40vh;
+  .detail-form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 1fr;
+    & > span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      border: 1px solid black;
+    }
+    #detailForm {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(5, 1fr);
+      .detail-form__detail {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 30px;
       }
     }
   }

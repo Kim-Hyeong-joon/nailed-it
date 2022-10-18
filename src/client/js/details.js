@@ -2,8 +2,6 @@ import {
   chartUpdate,
   paintDetailsChart,
   updateTotalDetails,
-  detailChart,
-  detailChartDestroy,
 } from "./detailChart";
 const todo1 = document.querySelector(
   ".todo-form__todo:nth-child(1) > input:nth-child(2)"
@@ -173,14 +171,18 @@ const paintDetailsForm = async () => {
   // 기존 form, chart 지우기
   const oldForm = document.getElementById("detailForm");
   const oldSpan = document.getElementById("detail-title");
-  const chartSpan = document.querySelector(".detail-chart > span");
+  const statusText = document.querySelector(
+    ".detail-chart__status-chart > span"
+  );
   if (oldForm) {
     oldSpan.remove();
     oldForm.remove();
   }
+
+  const detailChart = document.querySelector(".detail-chart__total-chart");
   if (detailChart) {
-    detailChartDestroy();
-    chartSpan.innerText = "";
+    detailChart.remove();
+    statusText.innerText = "";
   }
 
   // server에서 details 불러오기
@@ -326,14 +328,14 @@ const handleSelect = async (event) => {
     delete div.dataset.id;
     const oldForm = document.getElementById("detailForm");
     const oldSpan = document.getElementById("detail-title");
-    const chartSpan = document.querySelector(".detail-chart > span");
+    const statusText = document.querySelector(".detail-chart > span");
+    const detailChart = document.querySelector(".detail-chart__total-chart");
     if (oldForm) {
       oldSpan.remove();
       oldForm.remove();
     }
     if (detailChart) {
-      detailChartDestroy();
-      chartSpan.innerText = "";
+      detailChart.remove();
     }
   }
 };

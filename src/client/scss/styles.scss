@@ -19,6 +19,10 @@
 
 body {
   padding: $sidePadding;
-  background-color: black;
-  color: white;
+}
+
+@media (min-width: 335px) and (max-width: 758px) {
+  body {
+    padding: 1%;
+  }
 }

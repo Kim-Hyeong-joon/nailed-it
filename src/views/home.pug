@@ -56,16 +56,16 @@ block content
                         input(type="text", name="todo5", placeholder="5.", autocomplete="off", spellcheck="false")
                         button ✔️
                 input(type="submit" value="저장하기")#submitTodo
-        div.todo-chart
-            div.percentage-box
-                canvas(width="300", height="300")#percentChart
-                span 0%
+        div.todo-chart.chart
+            div.todo-chart__total-chart
+                div.todo-chart__status-chart
+                    span 0%
+            
+                
     
     div.detail-box
         div.detail-form
-        div.detail-chart
-            canvas#detailCanvas
-            span
+        div.detail-chart.chart
     div#updateChart
     div#destroyChart
 
@@ -73,4 +73,4 @@ block scripts
     script(src="/static/js/todo.js")
     script(src="/static/js/todoChart.js")
     script(src="/static/js/details.js")
-    script(type="module" src="/static/js/detailChart.js")
+    
