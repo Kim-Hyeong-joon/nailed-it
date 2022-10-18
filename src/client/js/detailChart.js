@@ -17,7 +17,7 @@ export const paintDetailsChart = (disabledArray, detailArray) => {
   achieveChart = (achieveNumber / totalNumber) * 100;
   if (achieveChart) {
     statusText.innerText = `${achieveChart}%`;
-    statusChart.style.height = `${achieveChart}%`;
+    statusChart.style.width = `${achieveChart}%`;
   } else {
     statusText.innerText = "0%";
     achieveChart = 0;
@@ -37,7 +37,7 @@ export const chartUpdate = (detail) => {
 
   achieveChart = achievePercent(achieveNumber);
   const statusChart = document.querySelector(".detail-chart__status-chart");
-  statusChart.style.height = `${achieveChart}%`;
+  statusChart.style.width = `${achieveChart}%`;
   statusChart.style.opacity = "1";
   const statusText = document.querySelector(
     ".detail-chart__status-chart > span"

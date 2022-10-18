@@ -61,7 +61,7 @@ const achievePercent = () => (achieveNumber / totalNumber) * 100;
 if (achieveChart && achieveChart !== Infinity) {
   statusText.innerText = `${achieveChart}%`;
   statusChart.style.opacity = "1";
-  statusChart.style.height = `${achieveChart}%`;
+  statusChart.style.width = `${achieveChart}%`;
 }
 
 // -------- check box에 click event가 발생 했을 때
@@ -91,7 +91,7 @@ const handleCheckClick = (event) => {
     statusChart.style.opacity = "0";
   }
 
-  statusChart.style.height = `${achieveChart}%`;
+  statusChart.style.width = `${achieveChart}%`;
 
   const todoSubmit = document.getElementById("submitTodo");
   todoSubmit.click();

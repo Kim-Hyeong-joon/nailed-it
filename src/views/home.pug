@@ -2,6 +2,10 @@ extends base
 
 block content
     div.todo-box
+        div.todo-chart.chart
+            div.todo-chart__total-chart
+                div.todo-chart__status-chart
+                    span 0%
         div.todo-wrapper
             span 해낼 일
             form(method="POST", action="/todos").todo-form
@@ -56,18 +60,11 @@ block content
                         input(type="text", name="todo5", placeholder="5.", autocomplete="off", spellcheck="false")
                         button ✔️
                 input(type="submit" value="저장하기")#submitTodo
-        div.todo-chart.chart
-            div.todo-chart__total-chart
-                div.todo-chart__status-chart
-                    span 0%
-            
-                
-    
+        
     div.detail-box
-        div.detail-form
         div.detail-chart.chart
-    div#updateChart
-    div#destroyChart
+        div.detail-form
+    
 
 block scripts 
     script(src="/static/js/todo.js")
