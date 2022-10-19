@@ -30,6 +30,7 @@ const todo4Trigger = document.querySelector(
 const todo5Trigger = document.querySelector(
   ".todo-form__todo:nth-child(5) > input:nth-child(1)"
 );
+const chartUpdateBtn = document.getElementById("updateChart");
 
 const todoArray = [todo1, todo2, todo3, todo4, todo5];
 let todoId;
@@ -116,6 +117,7 @@ const handleTodoSubmit = async (event) => {
     detailFormIdUpdate(todos[2], 2, "todo3");
     detailFormIdUpdate(todos[3], 3, "todo4");
     detailFormIdUpdate(todos[4], 4, "todo5");
+    chartUpdateBtn.click();
   }
 
   // detail form title update

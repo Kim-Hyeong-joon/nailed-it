@@ -54,7 +54,7 @@ let achieveNumber = todoDisabledArray.filter(
   (element) => element === true
 ).length;
 
-let achieveChart = (achieveNumber / totalNumber) * 100; // 초기 차트 셋팅용
+let achieveChart = Math.ceil((achieveNumber / totalNumber) * 100); // 초기 차트 셋팅용
 
 const achievePercent = () => (achieveNumber / totalNumber) * 100;
 
@@ -79,7 +79,7 @@ const handleCheckClick = (event) => {
     achieveNumber += 1;
   }
 
-  achieveChart = achievePercent(achieveNumber);
+  achieveChart = Math.ceil(achievePercent(achieveNumber));
 
   if (achieveChart && achieveChart !== Infinity) {
     statusText.innerText = `${achieveChart}%`;
@@ -104,9 +104,11 @@ const handleUpdateTotalTodos = () => {
     Boolean(element)
   ).length;
 
-  achieveChart = achievePercent();
+  achieveChart = Math.ceil(achievePercent());
+
   if (achieveChart && achieveChart !== Infinity) {
     statusText.innerText = `${achieveChart}%`;
+    statusChart.style.width = `${achieveChart}%`;
   }
 };
 
@@ -115,3 +117,5 @@ btn2.addEventListener("click", handleCheckClick);
 btn3.addEventListener("click", handleCheckClick);
 btn4.addEventListener("click", handleCheckClick);
 btn5.addEventListener("click", handleCheckClick);
+
+chartUpdateBtn.addEventListener("click", handleUpdateTotalTodos);

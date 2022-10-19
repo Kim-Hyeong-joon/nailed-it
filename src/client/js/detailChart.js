@@ -9,12 +9,12 @@ export const paintDetailsChart = (disabledArray, detailArray) => {
   const statusChart = document.createElement("div");
   statusChart.className = "detail-chart__status-chart";
   const statusText = document.createElement("span");
-  statusText.innerText = `${achieveChart}%`;
+  statusText.innerText = `${Math.ceil(achieveChart)}%`;
   const detailChart = document.querySelector(".detail-chart");
 
   achieveNumber = disabledArray.filter((element) => element === true).length;
   totalNumber = detailArray.filter((element) => element !== "").length;
-  achieveChart = (achieveNumber / totalNumber) * 100;
+  achieveChart = Math.ceil((achieveNumber / totalNumber) * 100);
   if (achieveChart) {
     statusText.innerText = `${achieveChart}%`;
     statusChart.style.width = `${achieveChart}%`;
@@ -36,7 +36,7 @@ export const chartUpdate = (detail) => {
     achieveNumber -= 1;
   }
 
-  achieveChart = achievePercent(achieveNumber);
+  achieveChart = Math.ceil(achievePercent(achieveNumber));
   const statusChart = document.querySelector(".detail-chart__status-chart");
   statusChart.style.width = `${achieveChart}%`;
   statusChart.style.opacity = "1";
@@ -55,7 +55,9 @@ export const chartUpdate = (detail) => {
 export const updateTotalDetails = (details) => {
   totalNumber = details.filter((element) => element !== "").length;
 
-  achieveChart = achievePercent();
+  achieveChart = Math.ceil(achievePercent());
+  const statusChart = document.querySelector(".detail-chart__status-chart");
+  statusChart.style.width = `${achieveChart}%`;
   const statusText = document.querySelector(
     ".detail-chart__status-chart > span"
   );
