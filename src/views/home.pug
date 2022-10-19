@@ -11,13 +11,13 @@ block content
             form(method="POST", action="/todos").todo-form
                 if todo1
                     div.todo-form__todo
-                        input(type="text", name="todo1Trigger", placeholder="구체적으로 언제, 어디서 할지 적어보세요!", value=todo1.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo1.disabled)
-                        input(type="text", name="todo1", placeholder="첫번째는 쉬운 일로 시작해보세요!", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled, autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo1Trigger", placeholder="언제, 어디서 할지 적어보세요!", value=todo1.todoTriggerValue autocomplete="off", spellcheck="false" disabled=todo1.disabled)
+                        input(type="text", name="todo1", placeholder="쉬운 일로 시작해보세요!", value=todo1.todo, data-id=todo1._id, disabled=todo1.disabled, autocomplete="off", spellcheck="false")
                         button ✔️
                 else 
                     div.todo-form__todo
-                        input(type="text", name="todo1Trigger", placeholder="구체적으로 언제, 어디서 할지 적어보세요!" autocomplete="off", spellcheck="false")
-                        input(type="text", name="todo1", placeholder="첫번째는 쉬운 일로 시작해보세요!", autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo1Trigger", placeholder="언제, 어디서 할지 적어보세요!" autocomplete="off", spellcheck="false")
+                        input(type="text", name="todo1", placeholder="쉬운 일로 시작해보세요!", autocomplete="off", spellcheck="false")
                         button ✔️
                 if todo2
                     div.todo-form__todo
