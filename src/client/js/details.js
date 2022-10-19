@@ -18,7 +18,6 @@ const todo4 = document.querySelector(
 const todo5 = document.querySelector(
   ".todo-form__todo:nth-child(5) > input:nth-child(2)"
 );
-const destroyBtn = document.getElementById("destroyChart");
 
 let todoId;
 let detailArray;
@@ -28,6 +27,8 @@ let detailTriggerArray;
 
 const handleDetailsSubmit = async (event) => {
   event.preventDefault();
+  const detailSubmitBtn = document.querySelector("#detailSubmit");
+  detailSubmitBtn.value = "저장중...";
   if (!todoId) {
     return;
   }
@@ -104,6 +105,7 @@ const handleDetailsSubmit = async (event) => {
   if (response.status === 201) {
     updateTotalDetails(details);
   }
+  detailSubmitBtn.value = "저장하기";
 };
 
 const createDetailTrigger = (
@@ -248,6 +250,7 @@ const paintDetailsForm = async () => {
     disabledArray[4]
   );
   const detail1 = createDetail("1", detailArray[0], disabledArray[0]);
+  detail1.placeholder = "행동을 잘게 쪼개보세요!";
   const detail2 = createDetail("2", detailArray[1], disabledArray[1]);
   const detail3 = createDetail("3", detailArray[2], disabledArray[2]);
   const detail4 = createDetail("4", detailArray[3], disabledArray[3]);
@@ -269,7 +272,7 @@ const paintDetailsForm = async () => {
   btn5.innerText = "✔️";
   const submit = document.createElement("input");
   submit.type = "submit";
-  submit.value = "저장";
+  submit.value = "저장하기";
   submit.id = "detailSubmit";
   div1.appendChild(detail1Trigger);
   div1.appendChild(detail1);
@@ -319,6 +322,10 @@ const handleSelect = async (event) => {
   todo3.removeEventListener("focus", handleSelect);
   todo4.removeEventListener("focus", handleSelect);
   todo5.removeEventListener("focus", handleSelect);
+
+  const loading = document.querySelector("#updateChart");
+  loading.innerText = "불러오는 중입니다...";
+
   if (event.target.dataset.id) {
     todoId = event.target.dataset.id;
   } else {
@@ -348,6 +355,7 @@ const handleSelect = async (event) => {
   todo3.addEventListener("focus", handleSelect);
   todo4.addEventListener("focus", handleSelect);
   todo5.addEventListener("focus", handleSelect);
+  loading.innerText = "";
 };
 
 todo1.addEventListener("focus", handleSelect);

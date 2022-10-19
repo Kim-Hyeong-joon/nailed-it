@@ -64,6 +64,7 @@ const detailFormIdUpdate = (todoObj, arrayIndex, todoNameId) => {
 // todo form POST
 const handleTodoSubmit = async (event) => {
   event.preventDefault();
+  submitTodo.value = "저장중...";
   const todo1Value = todo1.value;
   const todo2Value = todo2.value;
   const todo3Value = todo3.value;
@@ -177,6 +178,7 @@ const handleTodoSubmit = async (event) => {
       }
     }
   }
+  submitTodo.value = "저장하기";
 };
 
 const handleInputKeydown = (event) => {
