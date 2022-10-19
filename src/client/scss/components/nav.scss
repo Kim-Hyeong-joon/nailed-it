@@ -1,13 +1,15 @@
 nav {
-  height: 5vh;
+  height: 40px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 40px;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   color: black;
+  background-color: white;
   padding: $sidePadding;
   box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.5);
   & > *:nth-child(1) {
@@ -26,6 +28,17 @@ nav {
     transition: all 0.3s;
     &:hover {
       transform: scale(1.2);
+    }
+  }
+  .logo {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    div {
+      height: 100%;
+      img {
+        height: 100%;
+      }
     }
   }
 }

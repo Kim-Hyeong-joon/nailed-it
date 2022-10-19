@@ -1,12 +1,12 @@
 extends base
 
 block content
-    div.todo-box
+    div.chart-form-box
         div.todo-chart.chart
             div.todo-chart__total-chart
                 div.todo-chart__status-chart
                     span 0%
-        div.todo-wrapper
+        div.form
             span 해낼 일
             form(method="POST", action="/todos").todo-form
                 if todo1
@@ -61,9 +61,9 @@ block content
                         button ✔️
                 input(type="submit" value="저장하기")#submitTodo
         
-    div.detail-box
+    div.detail-box.chart-form-box
         div.detail-chart.chart
-        div.detail-form
+        div.detail-form.form
     
 
 block scripts 

@@ -1,6 +1,6 @@
 // Config
-@import "./config/_variables";
 @import "./config/reset.scss";
+@import "./config/_variables";
 
 //Components
 @import "./components/chart.scss";
@@ -19,12 +19,13 @@
 }
 
 body {
-  margin-top: 5vh;
+  margin-top: 40px;
   padding: $sidePadding;
 }
 
-@media (min-width: 335px) and (max-width: 758px) {
-  body {
-    padding: 1%;
+@media (max-width: 1100px) {
+  body,
+  nav {
+    padding: 0 1%;
   }
 }

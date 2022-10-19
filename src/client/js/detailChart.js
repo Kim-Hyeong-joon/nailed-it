@@ -21,6 +21,7 @@ export const paintDetailsChart = (disabledArray, detailArray) => {
   } else {
     statusText.innerText = "0%";
     achieveChart = 0;
+    statusText.style.opacity = "0";
   }
 
   statusChart.appendChild(statusText);
@@ -44,6 +45,9 @@ export const chartUpdate = (detail) => {
   );
   if (achieveChart && achieveChart !== Infinity) {
     statusText.innerText = `${achieveChart}%`;
+    statusText.style.opacity = "1";
+  } else if (achieveChart === 0) {
+    statusText.style.opacity = "0";
   }
 };
 

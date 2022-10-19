@@ -115,4 +115,3 @@ btn2.addEventListener("click", handleCheckClick);
 btn3.addEventListener("click", handleCheckClick);
 btn4.addEventListener("click", handleCheckClick);
 btn5.addEventListener("click", handleCheckClick);
-chartUpdateBtn.addEventListener("click", handleUpdateTotalTodos);
