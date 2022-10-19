@@ -16,18 +16,16 @@ html(lang="ko")
         link(rel="apple-touch-startup-image" href="/images/ipad-portrait.png" media="(device-width: 744px) and (orientation: portrait)")
     body
         nav
-            if loggedIn
-                a(href="/logout") 로그아웃
-                a(href="/").logo
-                    div
-                        img(src="/images/apple-touch-icon.png", alt="")
-                a(href="/#") #{loggedInUser.nickname}
-            else
-                a(href="/join") 회원가입
-                a(href="/").logo
-                    div
-                        img(src="/images/apple-touch-icon.png", alt="")
-                a(href="/login") 로그인
+            a(href="/").logo
+                div
+                    img(src="/images/apple-touch-icon.png", alt="")
+            div
+                if loggedIn
+                    a(href="/logout") 로그아웃
+                    a(href="/#") #{loggedInUser.nickname}
+                else
+                    a(href="/join") 회원가입
+                    a(href="/login") 로그인
         main 
             block content
         include partials/footer

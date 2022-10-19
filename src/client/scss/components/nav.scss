@@ -1,7 +1,7 @@
 nav {
   height: 40px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
   grid-template-rows: 40px;
   align-items: center;
   position: fixed;
@@ -12,28 +12,27 @@ nav {
   background-color: white;
   padding: $sidePadding;
   box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.5);
-  & > *:nth-child(1) {
-    justify-self: start;
-  }
-  & > *:nth-child(2) {
-    justify-self: center;
-  }
-  & > *:nth-child(3) {
-    justify-self: end;
-  }
-  a {
-    all: unset;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.3s;
-    &:hover {
-      transform: scale(1.2);
+  div {
+    a {
+      all: unset;
+      margin-left: 20px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
   .logo {
     display: flex;
     justify-content: center;
+    align-items: center;
     height: 100%;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(1.2);
+    }
     div {
       height: 100%;
       img {
