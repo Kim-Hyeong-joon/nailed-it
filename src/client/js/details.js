@@ -314,6 +314,11 @@ const paintDetailsForm = async () => {
 };
 
 const handleSelect = async (event) => {
+  todo1.removeEventListener("focus", handleSelect);
+  todo2.removeEventListener("focus", handleSelect);
+  todo3.removeEventListener("focus", handleSelect);
+  todo4.removeEventListener("focus", handleSelect);
+  todo5.removeEventListener("focus", handleSelect);
   if (event.target.dataset.id) {
     todoId = event.target.dataset.id;
   } else {
@@ -338,6 +343,11 @@ const handleSelect = async (event) => {
       detailChart.remove();
     }
   }
+  todo1.addEventListener("focus", handleSelect);
+  todo2.addEventListener("focus", handleSelect);
+  todo3.addEventListener("focus", handleSelect);
+  todo4.addEventListener("focus", handleSelect);
+  todo5.addEventListener("focus", handleSelect);
 };
 
 todo1.addEventListener("focus", handleSelect);
